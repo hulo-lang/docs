@@ -1,17 +1,16 @@
 ---
 home: true
 icon: house
-title: 项目主页
-heroImage: https://theme-hope-assets.vuejs.press/logo.svg
+title: Hulo Dev
+heroImage: logo.png
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: 项目名称
-tagline: 你可以在这里放置或是整个项目的描述。
+heroText: Hulo
+tagline: Hulo是一个面向批处理的编程语言。
 actions:
-  - text: 使用指南
-    icon: lightbulb
+  - text: 开始 💡
     link: ./demo/
     type: primary
 

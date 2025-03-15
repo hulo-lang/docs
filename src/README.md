@@ -1,17 +1,16 @@
 ---
 home: true
 icon: house
-title: Project home
-heroImage: https://theme-hope-assets.vuejs.press/logo.svg
+title: Hulo Dev
+heroImage: logo.png
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: Project name
-tagline: You can place the description of the project here.
+heroText: Hulo
+tagline: Hulo is a batch-oriented programming language.
 actions:
-  - text: How to Use
-    icon: lightbulb
+  - text: GET START 💡
     link: ./demo/
     type: primary
 

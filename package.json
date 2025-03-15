@@ -12,10 +12,14 @@
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.20",
+    "@vuepress/plugin-shiki": "2.0.0-rc.83",
     "sass-embedded": "^1.85.1",
     "vue": "^3.5.13",
     "vuepress": "2.0.0-rc.20",
     "vuepress-theme-hope": "2.0.0-rc.74"
   },
-  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "dependencies": {
+    "shiki": "^3.2.1"
+  }
 }

@@ -2,13 +2,13 @@ import { hopeTheme } from "vuepress-theme-hope";
 
 import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
-
+import shiki from "./index.js";
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
 
   author: {
-    name: "Mr.Hope",
-    url: "https://mister-hope.com",
+    name: "The Hulo Authors",
+    url: "https://github.com/hulo-io",
   },
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
@@ -101,7 +101,10 @@ export default hopeTheme({
     tabs: true,
     tasklist: true,
     vPre: true,
-
+    highlighter: {
+      type: "shiki",
+      ...shiki,
+    }
     // uncomment these if you need TeX support
     // math: {
     //   // install katex before enabling it
@@ -155,6 +158,7 @@ export default hopeTheme({
 
     icon: {
       prefix: "fa6-solid:",
+      assets: "fontawesome",
     },
 
     // Install @vuepress/plugin-pwa and uncomment these if you want a PWA
