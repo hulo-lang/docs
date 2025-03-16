@@ -41,7 +41,7 @@ export const enSidebar = sidebar({
         prefix: "base/",
         icon: "fas fa-magic",
         collapsible: true,
-        children: ["type", "expr", "stmt", "flow", "func"],
+        children: ["type", "cmd", "expr", "stmt", "flow", "func"],
       },
       {
         text: "Advanced Syntax",
