@@ -51,6 +51,36 @@ Hulo 允许使用 [FLAGS] 作为内置规则，代表所有 **flags（标志参�
 
 
 ### 自定义格式
+```hulo
+cmd myCommand {
+    @flag(format: "/a $v")
+    a: str
+
+    @flag(format: "/b")
+    b: bool
+
+    @flag(format: "/c $k $v")
+    c: map<str, str>
+
+    @flag(format: "")
+    d: list<num>
+
+    @flag(format: "")
+    e: list<num>
+
+    @flag(format: (ls: list<num>) => {
+        return "-f " + ";".join(["v" + (i+1) + "=" + v for i, v in enumerate(value)])
+    })
+    f: list<num>
+}
+
+myCommand -a "hello" // => myCommand /a "hello"
+myCommand -ab "hello" // => myCommand /a "hello" /b
+myCommand -c {"key1": "value1", "key2": "value2"} // => myCommand /c 
+myCommand -d [1, 2, 3] // => myCommand -d 1,2,3
+myCommand -e [1, 2, 3] // => myCommand -d 1 -d 2 -d 3
+myCommand -f [1, 2, 3] // => myCommand -d v1=1;v2=2;v3=3
+```
 
 ## 命令调用
 
