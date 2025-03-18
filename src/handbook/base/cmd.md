@@ -53,30 +53,73 @@ Hulo 允许使用 [FLAGS] 作为内置规则，代表所有 **flags（标志参�
 ### 自定义格式
 ```hulo
 cmd myCommand {
-    @flag(format: "/a $v")
+    @flag(format: "/a {{v}}")
     a: str
 
     @flag(format: "/b")
     b: bool
 
-    @flag(format: "/c $k $v")
+    @flag(format: "/c {{k}} {{v}}")
     c: map<str, str>
 
-    @flag(format: "")
+    @flag(format: customFormat1)
     d: list<num>
 
-    @flag(format: "")
+    @flag(format: customFormat2)
     e: list<num>
 
-    @flag(format: (ls: list<num>) => {
-        return "-f " + ";".join(["v" + (i+1) + "=" + v for i, v in enumerate(value)])
-    })
+    @flag(format: customFormat3)
     f: list<num>
+
+    // 对于字符串类型的默认构造
+    fn defaultFormat(fmt: str, obj: FlagObject, values: any) -> str {
+        match obj.value {
+            str => {
+                assert_type(values, str)
+                return template.apply(fmt, values)
+            },
+            map => {
+                assert_type(values, map)
+                let res = <str>[]
+                loop (k, v) in values {
+                    res.add(template.apply(fmt, k, v))
+                }
+                return res.join(" ")
+            },
+            list => {
+                assert_type(values, list)
+                let res = <str>[]
+                v.foreach((e) => res.add(template.apply(fmt, k, v)))
+                return res.join(" ")
+            },
+            bool => {
+                assert_type(values, bool)
+                return template.apply(fmt, values)
+            }
+        }
+    }
+
+    fn customFormat1(v: list<num>) -> str {
+        return "-d ${str.join($v, ",")}"
+    }
+
+    fn customFormat2(v: list<num>) -> str {
+        let res = <str>[]
+        v.foreach((e) => res.add("-d $e"))
+        return res.join(" ")
+    }
+
+    fn customFormat3(v: list<num>) -> str {
+        let res = <str>[]
+        let cnt: num = 0
+        v.foreach((e) => res.add("v$cnt=${cnt++}"))
+        return "-d ${res.join(";")}"
+    }
 }
 
 myCommand -a "hello" // => myCommand /a "hello"
 myCommand -ab "hello" // => myCommand /a "hello" /b
-myCommand -c {"key1": "value1", "key2": "value2"} // => myCommand /c 
+myCommand -c {"key1": "value1", "key2": "value2"} // => myCommand /c key1 value1 /c key2 value2
 myCommand -d [1, 2, 3] // => myCommand -d 1,2,3
 myCommand -e [1, 2, 3] // => myCommand -d 1 -d 2 -d 3
 myCommand -f [1, 2, 3] // => myCommand -d v1=1;v2=2;v3=3
