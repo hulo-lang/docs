@@ -1,11 +1,7 @@
 ---
 title: Specification
-icon: fas fa-box
+icon: fas fa-file-alt
 ---
-
-变量名、函数均采用小驼峰 abc, isName
-除了函数声明外，类名、枚举等均采用大驼峰 MyPackage
-文件名采用 snake型 a_b_c
 
 ## 通用规则
 
