@@ -49,26 +49,24 @@ myCommand -ab "hello" -c "World"
 Hulo 允许使用 [FLAGS] 作为内置规则，代表所有 **flags（标志参数）**。
 当然，你也可以直接穷举所有 flags 进行定义：
 
-可选参数: `myCommand [arg]`
-myCommand // ✔
-myCommand "hello" // ✔
-myCommand sayHello // ✔
+### **命令参数规则对比**  
 
-强制参数: `myCommand arg1 arg2`
-myCommand say hello // ✔
-myCommand 1 2 // ✔
-myCommand hello // incorrect
-myCommand // incorrect
+| **规则类型**  | **语法**                 | **示例**                 | **是否正确** |
+|--------------|-------------------------|-------------------------|-------------|
+| **可选参数** | `myCommand [arg]`        | `myCommand`             | ✔           |
+|              |                          | `myCommand "hello"`     | ✔           |
+|              |                          | `myCommand sayHello`    | ✔           |
+| **强制参数** | `myCommand arg1 arg2`    | `myCommand say hello`   | ✔           |
+|              |                          | `myCommand 1 2`        | ✔           |
+|              |                          | `myCommand hello`       | ❌          |
+|              |                          | `myCommand`             | ❌          |
+| **枚举类型** | `myCommand {start\|stop\|init}` | `myCommand start`    | ✔           |
+|              |                          | `myCommand stop`        | ✔           |
+|              |                          | `myCommand other`       | ❌          |
+| **可变参数** | `myCommand ...`          | `myCommand`             | ✔           |
+|              |                          | `myCommand 1 2 3`       | ✔           |
+|              |                          | `myCommand say hello`   | ✔           |
 
-枚举类型: `myCommand {strat|stop|init}`
-myCommand start // ✔
-myCommand stop // ✔
-myCommand other // incorrect
-
-可变参数: `myCommand ...`
-myCommand // ✔
-myCommand 1 2 3 // ✔
-myCommand say hello // ✔
 
 ### 自定义格式
 ```hulo
@@ -82,13 +80,13 @@ cmd myCommand {
     @flag(format: "/c {{k}} {{v}}")
     c: map<str, str>
 
-    @flag(format: customFormat1)
+    @flag(format: custom_format_1)
     d: list<num>
 
-    @flag(format: customFormat2)
+    @flag(format: custom_format_2)
     e: list<num>
 
-    @flag(format: customFormat3)
+    @flag(format: custom_format_3)
     f: list<num>
 
     // 对于字符串类型的默认构造
@@ -119,17 +117,17 @@ cmd myCommand {
         }
     }
 
-    fn customFormat1(v: list<num>) -> str {
+    fn custom_format_1(v: list<num>) -> str {
         return "-d ${str.join($v, ",")}"
     }
 
-    fn customFormat2(v: list<num>) -> str {
+    fn custom_format_2(v: list<num>) -> str {
         let res = <str>[]
         v.foreach((e) => res.add("-d $e"))
         return res.join(" ")
     }
 
-    fn customFormat3(v: list<num>) -> str {
+    fn custom_format_3(v: list<num>) -> str {
         let res = <str>[]
         let cnt: num = 0
         v.foreach((e) => res.add("v$cnt=${cnt++}"))
@@ -208,28 +206,28 @@ myCommand -c {1, 2, 3} // => myCommand -c 1 -c 2 -c 3
 
 ### enum类型
 ```hulo
-enum protocal {
+enum Protocal {
     port: num
 
     tcp(6),
     udp(17);
 }
 
-myCommand --protocal protocal::tcp --port protocal::tcp.port
+myCommand --protocal Protocal::tcp --port Protocal::tcp.port
 ```
 
 ### class类型
 ```hulo
-class user {
+class User {
     name: str
     pwd: str
 }
 
 // 命令行参数形式
-myCommand -u user{name: "root", pwd: "123456"} // => myCommand -u name="root" -u pwd="123456"
+myCommand -u User{name: "root", pwd: "123456"} // => myCommand -u name="root" -u pwd="123456"
 
 // 函数调用形式
-myCommand(u: user{name: "root", pwd: "123456"})
+myCommand(u: User{name: "root", pwd: "123456"})
 ```
 
 ### time类型

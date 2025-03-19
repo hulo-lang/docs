@@ -49,22 +49,22 @@ fn set_username(new_name: str)
 fn get_username() -> str
 ```
 
-## 结构体 & 类命名
-* builtin的基础类型都统一为小写, str、num、list、set、map...
-* 使用 PascalCase：
+## 命令 & 类命名
+* builtin的基础类型都统一为小写, str、num、list、map、any...
+* 命令名非必要都使用小写
 ```hulo
-struct UserProfile {
+cmd mycommand {
+    cmd init {}
+
+    cmd stop {}
+}
+```
+* 类名使用 PascalCase, 字段使用 snake_case：
+```hulo
+class UserProfile {
     username: str
     email: str
     age: num
-}
-```
-* 字段使用 snake_case：
-```
-struct ServerConfig {
-    host: str
-    port: num
-    is_https: bool
 }
 ```
 
@@ -91,7 +91,7 @@ enum UserRole {
 ```hulo
 const DEFAULT_RETRIES: num = 3
 
-struct DatabaseConfig {
+class DatabaseConfig {
     host: str
     port: num
     username: str
