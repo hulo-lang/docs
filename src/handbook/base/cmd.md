@@ -49,6 +49,26 @@ myCommand -ab "hello" -c "World"
 Hulo 允许使用 [FLAGS] 作为内置规则，代表所有 **flags（标志参数）**。
 当然，你也可以直接穷举所有 flags 进行定义：
 
+可选参数: `myCommand [arg]`
+myCommand // ✔
+myCommand "hello" // ✔
+myCommand sayHello // ✔
+
+强制参数: `myCommand arg1 arg2`
+myCommand say hello // ✔
+myCommand 1 2 // ✔
+myCommand hello // incorrect
+myCommand // incorrect
+
+枚举类型: `myCommand {strat|stop|init}`
+myCommand start // ✔
+myCommand stop // ✔
+myCommand other // incorrect
+
+可变参数: `myCommand ...`
+myCommand // ✔
+myCommand 1 2 3 // ✔
+myCommand say hello // ✔
 
 ### 自定义格式
 ```hulo

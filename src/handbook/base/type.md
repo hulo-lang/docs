@@ -88,26 +88,26 @@ let c: set<num> = {1, 2, 3}
 
 ```hulo
 // stimulate by union type
-type protocal = 'tcp' | 'udp'
+type Protocal = 'tcp' | 'udp'
 
 // method 1
-enum protocal {
+enum Protocal {
     tcp, udp
 }
 
-protocal::tcp
+Protocal::tcp
 
 // method 2
-enum protocal {
+enum Protocal {
     port: num
 
     tcp(6),
     udp(17);
 }
 
-protocal::tcp.port
-protocal::udp
-protocal::udp.index
+Protocal::tcp.port
+Protocal::udp
+Protocal::udp.index
 ```
 
 ## Class
