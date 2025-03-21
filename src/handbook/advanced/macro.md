@@ -21,7 +21,7 @@ fn extend_user({required }) {
     return _build(self: Class<User>) {
         echo $self.name // User
         echo ${self.fields.len} // 0
-        $self.fields.add(field(name: "name", type: ""))
+        $self.fields["name"] = symbol(str)
     }
 }
 
