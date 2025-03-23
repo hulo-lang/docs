@@ -1,6 +1,6 @@
 ---
 title: Data Types
-icon: fas fa-box
+icon: fas fa-font
 ---
 
 ## Number

@@ -67,7 +67,6 @@ Hulo 允许使用 [FLAGS] 作为内置规则，代表所有 **flags（标志参�
 |              |                          | `myCommand 1 2 3`       | ✔           |
 |              |                          | `myCommand say hello`   | ✔           |
 
-
 ### 自定义格式
 ```hulo
 cmd myCommand {
@@ -94,6 +93,7 @@ cmd myCommand {
         match obj.value {
             str => {
                 assert_type(values, str)
+                // apply 的时候 values 会调用 to_str() 方法
                 return template.apply(fmt, values)
             },
             map => {
