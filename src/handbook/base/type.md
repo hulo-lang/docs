@@ -59,13 +59,13 @@ echo $ss // echo ""
 
 let m: map<str, num> = null
 
-m?["a"].to_str()
+m?.["a"].to_str()
 ```
 
 ## Collections
 ```hulo
 // array
-let arr: int[3]
+let arr: num[3]
 
 arr[2] = 5
 arr[3] = 10 // error
