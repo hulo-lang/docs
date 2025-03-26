@@ -246,6 +246,21 @@ myCommand --at "23:00"
 myCommand -- -n "ansurfen"
 ```
 
+## 命令执行
+```hulo
+let my_cmd: cmd = ls "src/"
+
+$my_cmd
+
+& "./main.exe"
+
+let main: str = "main.exe"
+
+& $main
+
+let res: str = $(ls "src/")
+```
+
 ## 运算符
 
 ### 管道
