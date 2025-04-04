@@ -6,25 +6,170 @@
 			"include": "#comment"
 		},
 		{
-			"include": "#constant"
+			"include": "#unsafe"
 		},
 		{
-			"include": "#keywords"
+			"include": "#module"
+		},
+		{
+			"include": "#command"
+		},
+		{
+			"include": "#variable"
+		},
+		{
+			"include": "#enum"
 		},
 		{
 			"include": "#declaration"
 		},
 		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#constant"
+		},
+		{
 			"include": "#strings"
 		},
 		{
-			"include": "#single_strings"
-		},
-		{
-			"include": "#triple_strings"
+			"include": "#type"
 		}
 	],
 	"repository": {
+		"unsafe": {
+			"patterns": [
+				{
+					"begin": "(\\$)\\{",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.operator"
+						}
+					},
+					"end": "\\}",
+					"patterns": [
+						{
+							"begin": "\\{\\{",
+							"end": "\\}\\}",
+							"patterns": [
+								{
+									"match": "(if|loop|macro|end)",
+									"name": "keyword.control"
+								},
+								{
+									"include": "#constant"
+								},
+								{
+									"match": "(@|\\$|&)\\w+",
+									"name": "variable.other"
+								},
+								{
+									"include": "#operators"
+								},
+								{
+									"include": "#strings"
+								},
+								{
+									"match": "\\w+",
+									"name": "entity.name.function"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"command": {
+			"patterns": [
+				{
+					"name": "constant.other",
+					"match": "(?<!\\w)--[\\w-]+"
+				},
+				{
+					"name": "constant.other",
+					"match": "(?<!\\w)-\\w+\\b"
+				}
+			]
+		},
+		"module": {
+			"patterns": [
+				{
+					"match": "(\\w+)::",
+					"captures": {
+						"1": {
+							"name": "entity.name.namespace"
+						}
+					}
+				},
+				{
+					"match": "(?<=::)(\\w+)(?!\\s*(\\(|\\.))\\b",
+					"captures": {
+						"1": {
+							"name": "variable.other"
+						}
+					}
+				}
+			]
+		},
+		"variable": {
+			"patterns": [
+				{
+					"name": "variable.other",
+					"match": "(?<=(let|const|var) \\s*)\\w+"
+				},
+				{
+					"name": "variable.language",
+					"match": "\\$(this|super)"
+				},
+				{
+					"name": "variable.other",
+					"match": "\\$\\w+"
+				},
+				{
+					"match": "\\w+\\s*(?=:)",
+					"name": "variable.parameter"
+				},
+				{
+					"match": "(?<=\\.\\.)(\\w+)(?!\\s*\\()\\b",
+					"captures": {
+						"1": {
+							"name": "variable.parameter"
+						}
+					}
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.other",
+					"match": "(\\=\\>|\\-\\>|:=)"
+				},
+				{
+					"name": "support.function",
+					"match": "(?<!\\S)--(?!\\w)"
+				},
+				{
+					"name": "keyword.operator",
+					"match": "(@|\\.\\.\\.|\\?|:|\\!|&|\\$|\\||>|<|=|\\+|\\-|\\*|\\/|%|\\+=|\\-=|\\*=|\\/=|%=)"
+				}
+			]
+		},
+		"type": {
+			"patterns": [
+				{
+					"name": "entity.name.type",
+					"match": "\\b(str|num|bool|any|map|list)\\b"
+				},
+				{
+					"name": "entity.name.type",
+					"match": "\\b(\\w+)\\b"
+				}
+			]
+		},
 		"comment": {
 			"patterns": [
 				{
@@ -52,139 +197,17 @@
 		},
 		"declaration": {
 			"patterns": [
-				{ 
-					"match": "(@)(\\w+)",
-					"captures": {
-						"1": {
-							"name": "keyword.operator"
-						},
-						"2": {
-							"name": "entity.name.function"
-						}
-					}
-				},
-				{
-					"name": "keyword.control",
-					"match": "\\b(package|mod|part|use|class|enum|trait|fn|let|var|const|import|as|from|type|typeof|operator|impl|for|extend|try|catch|finally|defer|throw|throws)\\b"
-				},
-				{
-					"name": "storage.modifier",
-					"match": "\\b(static|final|pub|required)\\b"
-				},
-				{
-					"name": "entity.name.type",
-					"match": "\\b(str|num|bool|any|map|list)\\b"
-				},
-				{
-					"name": "entity.name.function.hulo",
-					"match": "(?<=\\.)\\s*(\\w+)\\s*\\(",
-					"captures": {
-						"1": {
-							"name": "entity.name.function.hulo"
-						}
-					}
-				},
-				{
-					"name": "variable.other",
-					"match": "\\$\\w+"
-				},
-				{
-					"name": "constant.other",
-					"match": "\\-\\w+"
-				},
-				{
-					"name": "comment.line.double-dash",
-					"match": "(?<=^|[^-\\w])--(?=$|[^-\\w])"
-				},
-				{
-					"name": "keyword.operator",
-					"match": "(@|\\.\\.\\.|\\?|:|\\!|&|\\||>|<|=|\\+|\\-|\\*|\\/|%|\\+=|\\-=|\\*=|\\/=|%=)"
-				},
 				{
 					"name": "entity.name.function",
 					"match": "(?<=fn \\s*)\\w+"
 				},
 				{
-					"name": "entity.name.class",
-					"match": "(?<=(class|trait|enum|impl|mod) \\s*)\\w+"
+					"name": "support.function",
+					"match": "@\\w+"
 				},
 				{
-					"name": "entity.name.type",
-					"match": "(?<=as \\s*)\\w+"
-				},
-				{
-					"name": "entity.name.function.hulo",
-					"match": "(\\w+)(!?)\\(",
-					"captures": {
-						"1": {
-							"name": "entity.name.function.hulo"
-						},
-						"2": {
-							"name": "keyword.operator"
-						}
-					}
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=for \\s*)((?:\\w+(?:\\s*(,)\\s*)?)+)",
-					"captures": {
-						"2": {
-							"name": "keyword.operator"
-						}
-					}
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=class \\s*\\w+: \\s*)((?:\\w+(?:\\s*(,)\\s*)?)+)",
-					"captures": {
-						"2": {
-							"name": "keyword.operator"
-						}
-					}
-				},
-				{
-					"name": "variable.language",
-					"match": "\\b(this|super)\\b"
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=\\(\\s*)(\\w+)(?=\\s*:)",
-					"captures": {
-						"2": {
-							"name": "variable.other"
-						}
-					}
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=\\{\\s*)(\\w+)(?=\\s*:)",
-					"captures": {
-						"2": {
-							"name": "variable.other"
-						}
-					}
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=required \\s*)(\\w+)(?=\\s*:)",
-					"captures": {
-						"2": {
-							"name": "variable.other"
-						}
-					}
-				},
-				{
-					"name": "variable.parameter",
-					"match": "(?<=,\\s*)(\\w+)(?=\\s*:)",
-					"captures": {
-						"2": {
-							"name": "variable.other"
-						}
-					}
-				},
-				{
-					"name": "entity.name.type",
-					"match": "\\w+(?={)"
+					"name": "entity.name.function",
+					"match": "\\w+(?=\\s*(<[^<>]*>)?\\s*\\()|\\b\\w+(?=\\s*(<[^<>]*>)?\\s*\\()"
 				}
 			]
 		},
@@ -192,59 +215,87 @@
 			"patterns": [
 				{
 					"name": "keyword.control.hulo",
-					"match": "\\b(if|else|match|do|loop|in|range|return|break|continue|comptime|declare|factory)\\b"
+					"match": "\\b(mod|part|use|class|enum|trait|cmd|fn|let|var|const|import|as|from|type|typeof|operator|impl|for|extend|try|catch|finally|defer|throw|throws|if|else|match|do|loop|in|range|return|break|continue|comptime|unsafe|extern|declare)\\b"
 				},
 				{
 					"name": "keyword.operator.new",
 					"match": "\\b(new|delete)\\b"
-				}
-			]
-		},
-		"multi_strings": {
-			"name": "string.quoted.triple.hulo",
-			"begin": "\"\"\"",
-			"end": "\"\"\""
-		},
-		"single_strings": {
-			"name": "string.quoted.single.hulo",
-			"begin": "'",
-			"end": "'",
-			"patterns": [
+				},
 				{
-					"name": "constant.character.escape.hulo",
-					"match": "\\\\."
+					"name": "storage.modifier",
+					"match": "\\b(static|final|pub|required|readonly|get)\\b"
 				}
 			]
 		},
 		"strings": {
-			"name": "string.quoted.double.hulo",
-			"begin": "\"",
-			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.hulo",
-					"match": "\\\\."
+					"name": "string.quoted.triple.hulo",
+					"begin": "\"\"\"",
+					"end": "\"\"\""
 				},
 				{
-					"begin": "(\\${)",
-					"end": "(})",
-					"beginCaptures": {
-						"1": {
-							"name": "variable.language"
+					"name": "string.quoted.single.hulo",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.hulo",
+							"match": "\\\\."
 						}
-					},
-					"endCaptures": {
-						"1": {
-							"name": "variable.language"
-						}
-					}
+					]
 				},
 				{
-					"name": "variable.language",
-					"match": "\\$\\w+"
+					"begin": "\"",
+					"end": "\"",
+					"name": "string.quoted.double.hulo", 
+					"patterns": [
+						{
+							"name": "constant.character.escape.hulo",
+							"match": "\\\\."
+						},
+						{
+							"begin": "(\\${)",
+							"end": "(})",
+							"beginCaptures": {
+								"1": {
+									"name": "punctuation.definition.template-expression.begin.hl"
+								}
+							},
+							"endCaptures": {
+								"1": {
+									"name": "punctuation.definition.template-expression.end.hl"
+								}
+							},
+							"patterns": [
+								{
+									"include": "#variable"
+								},
+								{
+									"include": "#declaration"
+								},
+								{
+									"include": "#keywords"
+								},
+								{
+									"include": "#operators"
+								},
+								{
+									"include": "#constant"
+								},
+								{
+									"include": "#type"
+								}
+							]
+						},
+						{
+							"name": "variable.language",
+							"match": "\\$\\w+"
+						}
+					]
 				}
 			]
 		}
 	},
-	"scopeName": "source.hulo"
+	"scopeName": "source.hl"
 }
