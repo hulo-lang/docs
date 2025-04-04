@@ -21,11 +21,12 @@
 			"include": "#enum"
 		},
 		{
-			"include": "#declaration"
-		},
-		{
 			"include": "#keywords"
 		},
+		{
+			"include": "#declaration"
+		},
+		
 		{
 			"include": "#operators"
 		},
@@ -206,8 +207,8 @@
 					"match": "@\\w+"
 				},
 				{
-					"name": "entity.name.function",
-					"match": "\\w+(?=\\s*(<[^<>]*>)?\\s*\\()|\\b\\w+(?=\\s*(<[^<>]*>)?\\s*\\()"
+					"name": "entity.name.function.hulo",
+					"match": "\\b\\w+(?=\\s*\\?\\.\\s*(<[^<>]*>)?\\s*\\()|\\b\\w+(?=\\s*(<[^<>]*>)?\\s*\\()"
 				}
 			]
 		},
@@ -215,7 +216,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.hulo",
-					"match": "\\b(mod|part|use|class|enum|trait|cmd|fn|let|var|const|import|as|from|type|typeof|operator|impl|for|extend|try|catch|finally|defer|throw|throws|if|else|match|do|loop|in|range|return|break|continue|comptime|unsafe|extern|declare)\\b"
+					"match": "\\b(mod|part|use|class|enum|trait|cmd|fn|let|var|const|import|is|as|from|type|typeof|operator|impl|for|extend|try|catch|finally|defer|throw|throws|if|else|match|do|loop|in|range|return|break|continue|comptime|unsafe|extern|declare)\\b"
 				},
 				{
 					"name": "keyword.operator.new",
@@ -248,7 +249,7 @@
 				{
 					"begin": "\"",
 					"end": "\"",
-					"name": "string.quoted.double.hulo", 
+					"name": "string.quoted.double.hulo",
 					"patterns": [
 						{
 							"name": "constant.character.escape.hulo",
