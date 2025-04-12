@@ -3,15 +3,16 @@ home: true
 icon: house
 title: 主页
 heroImage: logo.png
-bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
-bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
+bgImage: https://theme-hope-assets.vuejs.press/bg/5-light.svg
+bgImageDark: https://theme-hope-assets.vuejs.press/bg/5-dark.svg
 bgImageStyle:
   background-attachment: fixed
 heroText: Hulo
-tagline: Hulo是一个面向批处理的编程语言。
+tagline: Hulo 是一门专为批处理设计的编程语言，可编译为 Bash、PowerShell 和 VBS 等原生系统级脚本语言。
 actions:
-  - text: 开始 💡
+  - text: 立即开始
     link: ./demo/
+    icon: signs-post
     type: primary
 
   - text: 文档

@@ -11,7 +11,7 @@ export default hopeTheme({
     url: "https://github.com/hulo-lang",
   },
 
-  logo: "https://theme-hope-assets.vuejs.press/logo.svg",
+  logo: "/favicon.ico",
 
   repo: "vuepress-theme-hope/vuepress-theme-hope",
 
