@@ -8,7 +8,7 @@ export default hopeTheme({
 
   author: {
     name: "The Hulo Authors",
-    url: "https://github.com/hulo-io",
+    url: "https://github.com/hulo-lang",
   },
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
