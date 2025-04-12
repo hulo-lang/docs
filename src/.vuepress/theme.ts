@@ -158,7 +158,7 @@ export default hopeTheme({
 
     icon: {
       prefix: "fa6-solid:",
-      assets: "fontawesome",
+      assets: "fontawesome-with-brands",
     },
 
     // Install @vuepress/plugin-pwa and uncomment these if you want a PWA

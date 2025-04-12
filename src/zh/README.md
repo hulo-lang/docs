@@ -1,7 +1,7 @@
 ---
 home: true
 icon: house
-title: Hulo Dev
+title: 主页
 heroImage: logo.png
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
