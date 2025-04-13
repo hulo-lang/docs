@@ -1,32 +1,49 @@
 import { navbar } from "vuepress-theme-hope";
 
 export const enNavbar = navbar([
-  "/",
-  "/portfolio",
-  "/demo/",
-  "/handbook/",
   {
-    text: "Guide",
-    icon: "lightbulb",
+    text: "Get Started",
+    icon: "signs-post",
     prefix: "/guide/",
-    children: [
-      {
-        text: "Bar",
-        icon: "lightbulb",
-        prefix: "bar/",
-        children: ["baz", { text: "...", icon: "ellipsis", link: "#" }],
-      },
-      {
-        text: "Foo",
-        icon: "lightbulb",
-        prefix: "foo/",
-        children: ["ray", { text: "...", icon: "ellipsis", link: "#" }],
-      },
-    ],
+    link: "/guide/"
   },
   {
-    text: "V2 Docs",
+    text: "Docs",
     icon: "book",
-    link: "https://theme-hope.vuejs.press/",
+    prefix: "/grammar/",
+    link: "/grammar/"
+  },
+  {
+    text: "Blueprints",
+    icon: "lightbulb",
+    prefix: "/blueprints/",
+    link: "/blueprints/"
+  },
+  "/demos/",
+  {
+    text: "Others",
+    icon: "circle-info",
+    children: [
+      {
+        text: "PROJECT",
+        children: [
+          {
+            text: "CHANGELOG",
+            icon: "clock",
+            link: "#",
+          },
+          {
+            text: "Contribution Guide",
+            icon: "lightbulb",
+            link: "#",
+          },
+          {
+            text: "License",
+            icon: "fa-solid fa-paperclip",
+            link: "#"
+          }
+        ]
+      }
+    ]
   },
 ]);

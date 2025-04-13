@@ -8,12 +8,12 @@ tagline: Hulo is a batch-processing oriented programming language that compiles 
 actions:
   - text: GET STARTED
     icon: signs-post
-    link: ./demo/
+    link: ./guide/
     type: primary
 
   - text: Docs
     icon: book
-    link: ./guide/
+    link: ./grammar/
 
 highlights:
 
@@ -59,24 +59,24 @@ highlights:
     image: /assets/image/box.svg
     highlights:
       - title: HPM
-        icon: fas fa-box
+        icon: fa-solid fa-cube
         details: Hulo Package Manager - Dependency management tool with version resolution and private registry support
-        link:
+        link: /toolchain/pm
 
       - title: Editor Plugins
         icon: puzzle-piece
         details: Official IDE extensions for VS Code/IntelliJ with syntax highlighting, debugger integration and LSP support
-        link:
+        link: /toolchain/editor_plugin
 
       - title: Terminal UI
         icon: fas fa-terminal
         details: Interactive terminal components (progress bars, menus) with cross-shell rendering compatibility
-        link:
+        link: /toolchain/tui
 
       - title: DevOps
         icon: fas fa-repeat
         details: Native CI/CD integration through Docker images, GitHub Actions templates and pipeline utilities
-        link:
+        link: /toolchain/devops
 
   - header: Huloize
     description: Rewrite in hulo with type safety guarantees
@@ -105,6 +105,11 @@ highlights:
         icon: fa-solid fa-diamond
         details: A language compiled to Bash.
         link: https://github.com/hulo-lang/amber-example.git
+      
+      - title: Join us
+        icon: lightbulb
+        details:  
+        link: 
 
 copyright: false
 footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope

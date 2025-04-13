@@ -3,14 +3,18 @@ title: Guide
 icon: lightbulb
 ---
 
-## Highlight Features
+Welcome to the documentation of Hulo the programming language! 🎉
 
-### Bar
+Here is a minimal hello world example:
+```hulo
+echo "Hello World"
+```
 
-- [baz](bar/baz.md)
-- ...
+# What is Hulo?
 
-### Foo
+## Modern Syntax
 
-- [ray](foo/ray.md)
-- ...
+## Cross platform
+
+## Type Safety
+

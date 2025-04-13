@@ -1,3 +1,8 @@
+---
+title: Metadata
+icon: fas fa-puzzle-piece
+---
+
 ## Class
 ```hulo
 class Class {
