@@ -49,5 +49,22 @@ export const enSidebar = sidebar({
       icon: "rss",
       link: "https://ecosystem.vuejs.press/plugins/markdown/revealjs/demo.html",
     },
+  ],
+  "/blueprints/": [
+    "architecture"
+  ],
+  "/demos" : "structure",
+  "/others/": [
+    {
+      text: "Project",
+      icon: "circle-info",
+      children: [
+        "faq",
+        "roadmap",
+        "changelog",
+        "contribution",
+        "license"
+      ]
+    }
   ]
 });

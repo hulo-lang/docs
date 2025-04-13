@@ -1,6 +1,12 @@
 ---
 title: Statements
 icon: fas fa-scroll
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - stmt
+license: MIT
 ---
 
 ### type

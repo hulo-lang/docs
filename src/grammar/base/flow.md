@@ -1,6 +1,12 @@
 ---
 title: Control Flow
 icon: fas fa-repeat
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - flow
+license: MIT
 ---
 
 ## If

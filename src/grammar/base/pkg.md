@@ -1,6 +1,12 @@
 ---
 title: Package
 icon: fas fa-box
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - pkg
+license: MIT
 ---
 
 ## pub

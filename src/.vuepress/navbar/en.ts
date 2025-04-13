@@ -28,19 +28,29 @@ export const enNavbar = navbar([
         text: "PROJECT",
         children: [
           {
-            text: "CHANGELOG",
+            text: "FAQ",
+            icon: "circle-question",
+            link: "/others/faq"
+          },
+          {
+            text: "Roadmap",
+            icon: "map",
+            link: "/others/roadmap",
+          },
+          {
+            text: "Changelog",
             icon: "clock",
-            link: "#",
+            link: "/others/changelog",
           },
           {
             text: "Contribution Guide",
             icon: "lightbulb",
-            link: "#",
+            link: "/others/contribution",
           },
           {
             text: "License",
-            icon: "fa-solid fa-paperclip",
-            link: "#"
+            icon: "paperclip",
+            link: "/others/license"
           }
         ]
       }

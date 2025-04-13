@@ -83,6 +83,7 @@ export default hopeTheme({
     mark: true,
     plantuml: true,
     spoiler: true,
+    flowchart: true,
     stylize: [
       {
         matcher: "Recommended",
@@ -153,7 +154,7 @@ export default hopeTheme({
     },
 
     components: {
-      components: ["Badge", "VPCard"],
+      components: ["Badge", "VPCard", "VPBanner", "SiteInfo"],
     },
 
     icon: {

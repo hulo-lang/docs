@@ -1,6 +1,12 @@
 ---
 title: Specification
 icon: fas fa-file-alt
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - spec
+license: MIT
 ---
 
 ## 通用规则
@@ -18,14 +24,6 @@ let can_execute: bool = true
 ```hulo
 let user_count: num = 100
 let retry_count: num = 3
-```
-* 对于多行定义（>=3），建议只使用一个关键字：
-```hulo
-let (
-    user_count: num = 100
-    has_access: bool = false
-    can_execute: bool = true
-)
 ```
 
 ## 常量命名规则

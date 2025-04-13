@@ -1,6 +1,12 @@
 ---
 title: Command
 icon: fas fa-terminal
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - cmd
+license: MIT
 ---
 
 `cmd` 是 Hulo 的基础数据类型，其调用方式与传统命令类似。

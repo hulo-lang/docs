@@ -1,6 +1,12 @@
 ---
 title: Function
 icon: fas fa-superscript
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - func
+license: MIT
 ---
 
 ## Basic Syntax

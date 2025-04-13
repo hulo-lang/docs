@@ -1,6 +1,12 @@
 ---
 title: Data Types
 icon: fas fa-font
+date: 2025-04-13
+category: docs
+tag: 
+    - syntax
+    - type
+license: MIT
 ---
 
 ## Number

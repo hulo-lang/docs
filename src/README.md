@@ -1,9 +1,11 @@
 ---
 home: true
+containerClass: home
 icon: house
 title: Home
 heroImage: logo.png
 heroText: Hulo
+heroImageStyle:
 tagline: Hulo is a batch-processing oriented programming language that compiles to native system-level scripts like Bash, PowerShell, and VBS.
 actions:
   - text: GET STARTED
@@ -108,9 +110,9 @@ highlights:
       
       - title: Join us
         icon: lightbulb
-        details:  
-        link: 
+        details: Help us to refactor everything!
+        link: a
 
 copyright: false
-footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope
+footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2025-present Hulo
 ---

@@ -9,12 +9,3 @@ Here is a minimal hello world example:
 ```hulo
 echo "Hello World"
 ```
-
-# What is Hulo?
-
-## Modern Syntax
-
-## Cross platform
-
-## Type Safety
-
