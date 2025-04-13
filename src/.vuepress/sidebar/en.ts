@@ -51,9 +51,47 @@ export const enSidebar = sidebar({
     },
   ],
   "/blueprints/": [
-    "architecture"
+    "architecture",
+    {
+      text: "Bash",
+      icon: "fa-brands fa-linux",
+      prefix: "/blueprints/bash/",
+      collapsible: true,
+      children: [
+        "type",
+        "expr"
+      ]
+    },
+    {
+      text: "Powershell",
+      icon: "fa-brands fa-windows",
+      link: "",
+      collapsible: true,
+      children: []
+    },
+    {
+      text: "Batch",
+      icon: "fa-brands fa-windows",
+      link: "",
+      collapsible: true,
+      children: []
+    },
+    {
+      text: "VBScript",
+      icon: "fa-solid fa-v",
+      link: "",
+      collapsible: true,
+      children: []
+    },
+    {
+      text: "Amber",
+      icon: "fa-solid fa-diamond",
+      link: "",
+      collapsible: true,
+      children: []
+    },
   ],
-  "/demos" : "structure",
+  "/demos": "structure",
   "/others/": [
     {
       text: "Project",
