@@ -1,5 +1,5 @@
 ---
-title: type
+title: Type
 icon: fas fa-font
 date: 2025-04-13
 category: blueprint
@@ -11,7 +11,15 @@ license: MIT
 
 ## 基础类型
 
-| Hulo 类型      | Bash 类型 |
-| ----------- | ----------- |
-| $a := 10     | a=10       |
-| $a := "Hello World"   | a="Hello World" |
+```hulo
+// Hulo 示例
+$a := 10
+let b: str = "Hello World"
+
+```
+
+```bash
+# Bash 等价代码
+a=10
+echo $a
+```

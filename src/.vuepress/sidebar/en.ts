@@ -59,7 +59,8 @@ export const enSidebar = sidebar({
       collapsible: true,
       children: [
         "type",
-        "expr"
+        "expr",
+        "flow"
       ]
     },
     {
