@@ -10,17 +10,147 @@ license: MIT
 ---
 
 ## str
-```hulo
-// Hulo 示例
-$a := 10
-let b: str = "Hello World"
 
+### 变量赋值
+
+**输入：**
+```hulo
+$str1 := "Hello"
+let str2 = 'World'
+let str3: str? // 空字符串
+let str4 = "123" as str
 ```
 
+**输出：**
 ```bash
-# Bash 等价代码
-a=10
-echo $a
+str1="Hello"
+str2='World'
+str3="" # 空字符串
+str4="123"
+```
+
+### 长字符串
+
+::: tip
+在 Bash 中有多种方式可以实现长字符串，对于具体如何实现可以通过修改配置文件的方式实现
+:::
+
+::: code-tabs#shell
+
+@tab 续行符
+
+```json title="huloc.json"
+"bash": {
+    "multiStringResolution": "symbol"
+}
+```
+
+@tab Here-String
+
+```json title="huloc.json"
+"bash": {
+    "multiStringResolution": "Here-String"
+}
+```
+
+@tab Here-Doc
+
+```json title="huloc.json"
+"bash": {
+    "multiStringResolution": "Here-Doc"
+}
+```
+
+@tab ANSI C
+
+```json title="huloc.json"
+"bash": {
+    "multiStringResolution": "ANSI-C"
+}
+```
+:::
+
+**输入：**
+```hulo
+$str := """This is a very very long string
+that continues on the next line
+and still is a single string."""
+
+echo $str
+```
+
+**输出：**
+::: code-tabs#shell
+
+@tab 续行符
+
+```bash
+str="This is a \
+multi-line \
+string."
+
+echo "$str"
+```
+
+@tab Here-String
+
+```bash
+str=$(cat <<EOF
+This is a
+multi-line
+string.
+EOF
+)
+
+echo "$str"
+```
+
+@tab Here-Doc
+
+```bash
+str=$(cat <<'EOF'
+This is a
+multi-line
+string.
+EOF
+)
+
+echo "$str"
+```
+
+@tab ANSI C
+
+```bash
+str=$'This is a\nmulti-line\nstring.'
+
+echo "$str"
+```
+
+:::
+
+### 字符插值
+
+**输入：**
+```hulo
+$greeting := "Hello"
+$name := "Alice"
+
+$message := "$greeting, $name!"
+```
+
+**输出：**
+```bash
+greeting="Hello"
+name="Alice"
+
+message="$greeting, $name!"
+```
+
+### 字符串前缀
+```hulo
+r""
+c""
+f""
 ```
 
 ## num
@@ -149,11 +279,34 @@ print_float 9e-2
 :::
 
 鉴于以上两种方式, Hulo 提供编译选项的方式方便用户实现
+
+::: code-tabs#shell
+
+@tab 数值类型
+
 ```json title="huloc.json"
 "bash": {
-    "boolTypeResolution": ""
+    "boolTypeResolution": "number"
 }
 ```
+
+@tab 字符类型
+
+```json title="huloc.json"
+"bash": {
+    "boolTypeResolution": "string"
+}
+```
+
+@tab 命令类型
+
+```json title="huloc.json"
+"bash": {
+    "boolTypeResolution": "command"
+}
+```
+:::
+
 
 **输入：**
 ```hulo
@@ -169,7 +322,7 @@ if false {
 **输出：**
 ::: code-tabs#shell
 
-@tab 模拟
+@tab 数值类型
 
 ```bash
 if [ 0 -eq 0 ]; then
@@ -181,7 +334,19 @@ if [ 1 -eq 0 ] then
 fi
 ```
 
-@tab 命令
+@tab 字符类型
+
+```bash
+if [ "true" = "true" ]; then
+  echo "This always runs"
+fi
+
+if [ "true" = "false" ]; then
+  echo "This never runs"
+fi
+```
+
+@tab 命令类型
 
 ```bash
 if true; then
@@ -192,5 +357,5 @@ if false; then
   echo "This never runs"
 fi
 ```
-
 :::
+
