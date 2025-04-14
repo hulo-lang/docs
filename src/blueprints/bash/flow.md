@@ -9,6 +9,46 @@ tag:
 license: MIT
 ---
 
+## if
+
+
+
+### 变量
+```
+if $a > 10 {
+
+}
+```
+
+::: code-tabs#shell
+
+
+```bash
+
+```
+
+:::
+
+### 命令
+```
+if ! cmd {
+    echo "cmd not found"
+}
+
+if $(cmd) == "0" {
+    echo "successfully to execute"
+}
+```
+
+### 原生集成
+```
+if ${} {
+
+}
+```
+
+## until
+
 ## 条件判断参数
 
 ### 🔢 整数比较
