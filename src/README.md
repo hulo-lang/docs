@@ -60,7 +60,12 @@ highlights:
     description: Awesome and powerful extensions for Hulo
     image: /assets/image/box.svg
     highlights:
-      - title: HPM
+      - title: Compiler
+        icon: fa-tools
+        details: Hulo Compiler - Transpiles high-level Hulo code into Bash, PowerShell, VBScript, and Batch for seamless cross-platform automation scripting
+        link: /toolchain/compiler
+
+      - title: hlpm
         icon: fa-solid fa-cube
         details: Hulo Package Manager - Dependency management tool with version resolution and private registry support
         link: /toolchain/pm

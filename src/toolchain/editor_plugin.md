@@ -7,3 +7,7 @@ tag:
     - plugin
 license: MIT
 ---
+
+@startregex
+/^(?<command>\w+)(?:\s+-(?<flag>\w+)(?:\s+(?<arg>(?:"[\"]*"|'[\']*'|\[[\]]*\]|\{[\}]*\}|[^*]+))?)?(?:\s+|$))*/gmx
+@endregex

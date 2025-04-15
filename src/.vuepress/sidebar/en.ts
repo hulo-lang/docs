@@ -42,7 +42,7 @@ export const enSidebar = sidebar({
       icon: "hammer",
       prefix: "toolchain/",
       collapsible: false,
-      children: ["pm", "editor_plugin", "tui", "devops"]
+      children: ["compiler", "pm", "editor_plugin", "tui", "devops"]
     },
     {
       text: "Feedback",
