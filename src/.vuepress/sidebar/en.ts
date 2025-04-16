@@ -63,7 +63,9 @@ export const enSidebar = sidebar({
       children: [
         "type",
         "expr",
-        "flow"
+        "branch",
+        "loop",
+        "func"
       ]
     },
     {

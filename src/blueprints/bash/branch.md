@@ -1,6 +1,6 @@
 ---
-title: Control Flow
-icon: fas fa-puzzle-piece
+title: Conditional branch
+icon: fa-solid fa-code-branch
 date: 2025-04-14
 category: blueprint
 tag: 
@@ -11,23 +11,58 @@ license: MIT
 
 ## if
 
+### 单分支
 
+**输入：**
+```hulo
+let age: num = 10
 
-### 变量
-```
-if $a > 10 {
-
+if $age > 18 {
+    echo "you are an adult"
 }
 ```
 
-::: code-tabs#shell
-
-
+**输出：**
 ```bash
+age=10
 
+if [ "$age" -gt 18 ];then
+    echo "you are an adult"
+fi
 ```
 
-:::
+### 多分支
+
+**输入：**
+```hulo
+$score := 60
+
+if $score > 90 {
+  echo "Grade: excellent"
+} else if $score > 75 {
+  echo "Grade: good"
+} else if $score > 60 {
+  echo "Grade: Pass"
+} else {
+  echo "Grade: fail"
+}
+```
+
+**输出：**
+```bash
+score=85
+
+if [ "$score" -ge 90 ]; then
+  echo "Grade: excellent"
+elif [ "$score" -ge 75 ]; then
+  echo "Grade: good"
+elif [ "$score" -ge 60 ]; then
+  echo "Grade: Pass"
+else
+  echo "Grade: fail"
+fi
+```
+
 
 ### 命令
 ```
@@ -47,11 +82,9 @@ if ${} {
 }
 ```
 
-## until
+### 判断表达式
 
-## 条件判断参数
-
-### 🔢 整数比较
+#### 整数比较
 ::: warning
 只能用于整数
 :::
@@ -65,7 +98,7 @@ if ${} {
 | `-lt` |	小于	 | < |
 | `-le` |	小于等于 | <= |
 
-### 🧵 字符串判断
+#### 字符串判断
 
 | 表达式      | 含义 | 等价于 |
 | ----------- | ----------- | ----------- |
@@ -74,7 +107,7 @@ if ${} {
 | "$a" = "$b" |	字符串相等| $a == $b |
 | "$a" != "$b" | 字符串不相等 | $a != $b |
 
-### 🔀 逻辑判断
+#### 逻辑判断
 | 表达式      | 含义 | 等价于 |
 | ----------- | ----------- | ----------- |
 | `-a`      | 与       | & |
@@ -83,7 +116,7 @@ if ${} {
 | `&&`   | 条件与（用于多个 `[ ... ]`）| && |
 
 
-### 📁 文件相关
+#### 文件相关
 
 | 表达式      | 含义 | 等价于 |
 | ----------- | ----------- | ----------- |
@@ -106,3 +139,94 @@ if ${} {
 | file1 -nt file2 |	file1 比 file2 新 |	f"file1" > f"file2" |
 | file1 -ot file2 | file1 比 file2 旧 |	f"file1" < f"file2" |
 | file1 -ef file2 | file1 和 file2 是同一个文件（硬链接）|	f"file1" == f"file2" |
+
+## case
+
+### 单模式匹配
+
+**输入：**
+```hulo
+$i := 1
+
+match $i {
+    0 => echo "i is 0",
+    1 => echo "i is 1",
+    _ => echo "i is others",
+}
+```
+
+**输出：**
+```bash
+i=1
+
+case "$i" in
+  0)
+    echo "i is 0"
+    ;;
+  1)
+    echo "i is 1"
+    ;;
+  *)
+    echo "i is others"
+    ;;
+esac
+```
+
+### 多模式匹配
+
+**输入：**
+```hulo
+match $x {
+    "apple", "banana" => echo "matched: apple or banana",
+    _ => echo "no matched",
+}
+```
+
+**输出：**
+```bash
+case "$x" in
+  apple|banana)
+    echo "matched: apple or banana"
+    ;;
+  *)
+    echo "no matched"
+    ;;
+esac
+```
+
+### 通配符
+
+
+## select
+
+::: tip
+为了保证跨平台，Hulo 暂不支持 select 语法。因此，为了使用原生select语法糖，你需要使用unsafe嵌入原生脚本。
+:::
+
+**输入：**
+```hulo
+${
+select fruit in apple banana orange
+do
+  if [ -n "$fruit" ]; then
+    echo "You selected: $fruit"
+    break
+  else
+    echo "Invalid choice"
+  fi
+done
+}
+```
+
+**输出：**
+```bash
+select fruit in apple banana orange
+do
+  if [ -n "$fruit" ]; then
+    echo "You selected: $fruit"
+    break
+  else
+    echo "Invalid choice"
+  fi
+done
+```
