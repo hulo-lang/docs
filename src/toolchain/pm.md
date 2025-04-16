@@ -14,10 +14,13 @@ license: MIT
 hlpm 封装了大部分 hulo 编译器的命令，因此在一般情况下只需要使用包管理工具便可代替编译器的大部分功能执行。
 :::
 
-## install
+
+## 命令
+
+### install
 
 安装第三方依赖
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm install <pkg>...
@@ -25,7 +28,7 @@ hlpm install <pkg>...
 别名：add, i, in, ins, inst, insta, instal
 ```
 
-### Examples
+#### Examples
 
 ```sh
 hlpm install HelloWorld
@@ -33,13 +36,13 @@ hlpm i HelloWorld@1.0.0
 hlpm i HelloWorld@1.0.0 HelloWorld@1.0.1
 ```
 
-### Configuration
+#### Configuration
 
 
-## uninstall
+### uninstall
 
 卸载第三方依赖
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm uninstall <pkg>...
@@ -47,15 +50,15 @@ hlpm uninstall <pkg>...
 别名: remove, rm, r, un
 ```
 
-### Examples
+#### Examples
 
-### Configuration
+#### Configuration
 
-## run
+### run
 
 编译完指定源文件后，会在当前工作目录创建临时文件运行目标语言脚本，结束后自动删除。
 
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm run [FLAGS] [FILE]
@@ -63,17 +66,17 @@ hlpm run [FLAGS] [FILE]
 别名：r
 ```
 
-### Examples
+#### Examples
 
 ```sh
 hlpm run main.hl
 ```
 
-### Configuration
+#### Configuration
 
-## build
+### build
 
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm build [FLAGS] [FILES]...
@@ -81,13 +84,13 @@ hlpm build [FLAGS] [FILES]...
 别名：b, bu
 ```
 
-### Examples
+#### Examples
 
 ```sh
 hlpm build main.hl --lang bash
 ```
 
-### Configuration
+#### Configuration
 
 **`-l`、`--lang`**
 
@@ -102,9 +105,9 @@ hlpm build main.hl --lang bash
 * 类型: `bool`
 * 默认值: false
 
-## test
+### test
 
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm test [FILE] [FUNC]... -- [FLAGS]
@@ -112,16 +115,16 @@ hlpm test [FILE] [FUNC]... -- [FLAGS]
 别名：t
 ```
 
-### Examples
+#### Examples
 ```sh
 hlpm test test.hl test_a test_b
 ```
 
-### Configuration
+#### Configuration
 
-## version
+### version
 
-### Declaration
+#### Declaration
 
 ``` :no-line-numbers
 hlpm version
@@ -129,13 +132,13 @@ hlpm version
 别名：v
 ```
 
-### Examples
+#### Examples
 ```sh
 hlpm version
 hlpm v -p
 ```
 
-### Configuration
+#### Configuration
 
 **`-p`、`--pure`**
 
@@ -154,3 +157,5 @@ hlpm v -p
 ██║  ██║███████╗██║     ██║ ╚═╝ ██║
 ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝     ╚═╝
 ```
+
+## 配置文件
