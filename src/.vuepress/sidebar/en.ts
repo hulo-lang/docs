@@ -7,12 +7,14 @@ export const enSidebar = sidebar({
       icon: "lightbulb",
       prefix: "guide/",
       collapsible: false,
+      link: "/guide/",
       children: ["install", "usage"],
     },
     {
       text: "Docs",
       icon: "book",
       prefix: "grammar/",
+      link: "/grammar/",
       children: [
         {
           text: "Basic Syntax",
@@ -42,6 +44,7 @@ export const enSidebar = sidebar({
       icon: "hammer",
       prefix: "toolchain/",
       collapsible: false,
+      link: "/toolchain/",
       children: ["compiler", "pm", "editor_plugin", "tui", "devops"]
     },
     {

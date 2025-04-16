@@ -4,21 +4,20 @@ icon: sitemap
 ---
 
 ```flow:vue
-st=>start: 开始|past:>http://www.google.com[blank]
-e=>end: 结束|future:>http://www.google.com
-op1=>operation: 操作1|past
-op2=>operation: 操作2|current
-sub1=>subroutine: 子程序|invalid
-cond=>condition: 是/否?|approved:>http://www.google.com
-c2=>condition: 判断2|rejected
-io=>inputoutput: 进行反思...|future
+source=>start: 源文件
+e=>end: 目标代码
+io=>inputoutput: Hulo节点
+op1=>operation: Comptime
+sub1=>subroutine: 求值
+cond=>condition: 存在?
 
-st->op1(right)->cond
-cond(yes, right)->c2
-cond(no)->sub1(left)->op1
-c2(yes)->io->e
-c2(no)->op2->e
+source->io->op1(right)->cond
+cond(no, right)->e
+cond(yes)->sub1(left)->op1
 ```
+
+Hulo 在翻译AST节点前会将所有Comptime求值，这个流程可以表示为 `huloast.Node` -> `huloast.Node`。之后才会将 hulo节点 翻译成目标节点。
+
 
 ::: important Frontmatter
 

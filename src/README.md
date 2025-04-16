@@ -51,7 +51,7 @@ highlights:
         details: Built-in error handling with try-catch mechanisms and automatic resource cleanup
         link: 
 
-      - title: Compile Time
+      - title: Compile-Time
         icon: diagram-project
         details: Advanced metaprogramming capabilities through compile-time code generation and analysis
         link: 
