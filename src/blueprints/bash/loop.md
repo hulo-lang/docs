@@ -166,3 +166,87 @@ for i in *.png; do
   ls -l $i
 done
 ```
+
+## break、continue
+
+`break` 命令立即终止循环，程序继续执行循环块之后的语句，即不再执行剩下的循环。
+
+**输入：**
+```hulo
+$i := 0
+
+loop {
+    if $i == 5 {
+        break
+    }
+    $i++
+}
+```
+
+**输出：**
+```bash
+i=0
+
+while true; do
+  if [ "$i" -eq 5 ]; then
+    break
+  fi
+  i=$((i + 1))
+done
+```
+
+`continue` 命令立即终止本轮循环，开始执行下一轮循环。
+
+**输入：**
+```hulo
+loop $i := 0; $i < 10; $i++ {
+    if $i == 5 {
+        continue
+    }
+    echo $i
+}
+```
+
+**输出：**
+```bash
+for ((i = 0; i < 10; i++)); do
+  if [[ "$i" -eq 5 ]]; then
+    continue
+  fi
+  echo "$i"
+done
+```
+
+## select
+
+::: tip
+为了保证跨平台，Hulo 暂不支持 select 语法。因此，为了使用原生select语法糖，你需要使用unsafe嵌入原生脚本。
+:::
+
+**输入：**
+```hulo
+${
+select fruit in apple banana orange
+do
+  if [ -n "$fruit" ]; then
+    echo "You selected: $fruit"
+    break
+  else
+    echo "Invalid choice"
+  fi
+done
+}
+```
+
+**输出：**
+```bash
+select fruit in apple banana orange
+do
+  if [ -n "$fruit" ]; then
+    echo "You selected: $fruit"
+    break
+  else
+    echo "Invalid choice"
+  fi
+done
+```

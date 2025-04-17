@@ -195,38 +195,3 @@ esac
 ```
 
 ### 通配符
-
-
-## select
-
-::: tip
-为了保证跨平台，Hulo 暂不支持 select 语法。因此，为了使用原生select语法糖，你需要使用unsafe嵌入原生脚本。
-:::
-
-**输入：**
-```hulo
-${
-select fruit in apple banana orange
-do
-  if [ -n "$fruit" ]; then
-    echo "You selected: $fruit"
-    break
-  else
-    echo "Invalid choice"
-  fi
-done
-}
-```
-
-**输出：**
-```bash
-select fruit in apple banana orange
-do
-  if [ -n "$fruit" ]; then
-    echo "You selected: $fruit"
-    break
-  else
-    echo "Invalid choice"
-  fi
-done
-```
