@@ -1,8 +1,8 @@
 ---
 title: Grammar
-icon: book
+icon: code
+date: 2025-04-19
+category: grammar
 ---
 
-<div class="catalog-display-container">
-  <Catalog base='/grammar' />
-</div>
+<Catalog />

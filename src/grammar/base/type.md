@@ -1,8 +1,8 @@
 ---
 title: Data Types
-icon: fas fa-font
+icon: fas fa-spell-check
 date: 2025-04-13
-category: docs
+category: grammar
 tag: 
     - syntax
     - type

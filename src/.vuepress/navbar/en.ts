@@ -8,8 +8,8 @@ export const enNavbar = navbar([
     link: "/guide/"
   },
   {
-    text: "Docs",
-    icon: "book",
+    text: "Grammar",
+    icon: "code",
     prefix: "/grammar/",
     link: "/grammar/"
   },

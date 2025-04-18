@@ -2,7 +2,7 @@
 title: Specification
 icon: fas fa-file-alt
 date: 2025-04-13
-category: docs
+category: grammar
 tag: 
     - syntax
     - spec

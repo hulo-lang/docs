@@ -11,8 +11,8 @@ export const enSidebar = sidebar({
       children: ["install", "usage"],
     },
     {
-      text: "Docs",
-      icon: "book",
+      text: "Grammar",
+      icon: "code",
       prefix: "grammar/",
       link: "/grammar/",
       children: [
@@ -26,17 +26,22 @@ export const enSidebar = sidebar({
         {
           text: "Advanced Syntax",
           prefix: "advanced/",
-          icon: "fas fa-rocket",
+          icon: "fas fa-layer-group",
           collapsible: true,
-          children: ["trait", "generics", "macro", "metadata"],
+          children: ["trait", "generics", "macro", "metadata", "test"],
         },
-        {
-          text: "Standard Library",
-          prefix: "stdlib/",
-          icon: "fas fa-university",
-          collapsible: true,
-          children: [],
-        }
+      ],
+    },
+    {
+      text: "Standard Library",
+      prefix: "libs/",
+      icon: "fas fa-coins",
+      collapsible: true,
+      children: [
+        "builtin",
+        "time",
+        "math",
+        "fs",
       ],
     },
     {
@@ -55,6 +60,7 @@ export const enSidebar = sidebar({
   ],
   "/blueprints/": [
     "architecture",
+    "hcr",
     {
       text: "Bash",
       icon: "fa-brands fa-linux",
@@ -85,9 +91,9 @@ export const enSidebar = sidebar({
     {
       text: "VBScript",
       icon: "fa-solid fa-v",
-      link: "",
+      prefix: "/blueprints/vbs/",
       collapsible: true,
-      children: []
+      children: ["branch"]
     },
     {
       text: "Amber",

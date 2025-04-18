@@ -1,6 +1,11 @@
 ---
 title: Architecture
 icon: sitemap
+date: 2025-04-14
+category: blueprint
+tag: 
+    - arch
+license: MIT
 ---
 
 ```flow:vue

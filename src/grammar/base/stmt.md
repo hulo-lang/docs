@@ -2,7 +2,7 @@
 title: Statements
 icon: fas fa-scroll
 date: 2025-04-13
-category: docs
+category: grammar
 tag: 
     - syntax
     - stmt

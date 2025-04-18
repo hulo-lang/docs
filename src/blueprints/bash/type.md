@@ -1,6 +1,6 @@
 ---
 title: Type
-icon: fas fa-font
+icon: fas fa-spell-check
 date: 2025-04-13
 category: blueprint
 tag:

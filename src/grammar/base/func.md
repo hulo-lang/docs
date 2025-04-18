@@ -2,7 +2,7 @@
 title: Function
 icon: fas fa-superscript
 date: 2025-04-13
-category: docs
+category: grammar
 tag: 
     - syntax
     - func

@@ -2,7 +2,7 @@
 title: Control Flow
 icon: fas fa-repeat
 date: 2025-04-13
-category: docs
+category: grammar
 tag: 
     - syntax
     - flow
