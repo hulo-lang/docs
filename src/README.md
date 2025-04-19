@@ -10,12 +10,12 @@ tagline: Hulo is a batch-processing oriented programming language that compiles 
 actions:
   - text: GET STARTED
     icon: signs-post
-    link: ./en_us/guide/
+    link: ./guide/
     type: primary
 
   - text: Docs
     icon: book
-    link: ./en_us/grammar/
+    link: ./grammar/
 
 highlights:
 
