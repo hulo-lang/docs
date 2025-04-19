@@ -12,7 +12,7 @@ license: MIT
 
 >**if** is one of the most fundamental conditional control statements in programming, used to determine whether a block of code should execute based on the value of a boolean expression (true or false).
 
-```hulo
+```hulo :no-line-numbers
 let c: num = 5
 
 if $c < 3 {
@@ -30,7 +30,7 @@ if $c < 3 {
 >Additionally, **match** typically includes a default branch to handle cases that do not explicitly match any pattern, ensuring robustness and predictability in program behavior.
 
 ### 值匹配
-```
+```hulo :no-line-numbers
 let max = $a > $b ? $a : $b
 
 $max = ($a > $b) ? $a : ($b > 10 ? $b : ($b > $max ? $b : $max))
@@ -44,7 +44,7 @@ match $max {
 ```
 
 ### 类型断言
-```
+```hulo :no-line-numbers
 let a = 10
 
 let ok: str? = () => {
@@ -56,7 +56,7 @@ let ok: str? = () => {
 ```
 
 ### 元组匹配
-```
+```hulo :no-line-numbers
 let pair: triple<num> = (2, -3)
 
 match $pair {
@@ -72,7 +72,7 @@ match $pair {
 >A **loop** is a control structure in programming used to repeatedly execute a block of code until a specific termination condition is met. Loops greatly reduce redundancy in code and enable efficient handling of data in bulk. 
 
 ### 列表遍历
-```
+```hulo :no-line-numbers
 let arr: list<num> = [1, 3.14, 5.0, 0.7]
 
 loop (let i = 0; $i < $arr.len(); $i++) {
@@ -85,7 +85,7 @@ loop (i: num, v: num) in $arr {
 ```
 
 ### 数值遍历
-```
+```hulo :no-line-numbers
 // 从 1 遍历到 5，步长为 0.1
 loop i in range(1, 5, 0.1) {
     echo $i
@@ -93,7 +93,7 @@ loop i in range(1, 5, 0.1) {
 ```
 
 ### while循环
-```
+```hulo :no-line-numbers
 let cnt = 0
 loop {
     $cnt++
@@ -105,7 +105,7 @@ loop {
 ```
 
 ### do...while循环
-```
+```hulo :no-line-numbers
 let cnt = 0
 do {
     $cnt++
@@ -113,7 +113,7 @@ do {
 ```
 
 ### lambda表达式
-```
+```hulo :no-line-numbers
 let cnt = 0
 let res: num = () => {
     loop {
@@ -128,7 +128,7 @@ let res: num = () => {
 ```
 
 ### 标签
-```
+```hulo :no-line-numbers
 L1: loop {
     println("enter l1")
 

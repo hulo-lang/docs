@@ -10,7 +10,7 @@ license: MIT
 
 ## pub
 pub 关键字用于标注表达式/语句是否可导出。默认情况下，没有pub标记的表达式/语句是无法供外部访问的。
-```hulo
+```hulo :no-line-numbers
 pub var PI = 3.14
 
 pub fn sayHello() {
@@ -25,7 +25,7 @@ pub fn sayHello() {
 ::: tip
 适用于只想执行模块中的副作用（比如注册全局变量、初始化逻辑）
 :::
-```hulo
+```hulo :no-line-numbers
 import "./setup"
 ```
 
@@ -35,17 +35,17 @@ import "./setup"
 * 必须使用模块原本的名称
 * 支持解构风格导入
 :::
-```hulo
+```hulo :no-line-numbers
 import { funcA, funcB } from "./myModule"
 ```
 
 🔹 重命名导入（别名）
-```hulo
+```hulo :no-line-numbers
 import { funA as A } from "./myModule"
 ```
 
 🔹 导入所有导出
-```hulo
+```hulo :no-line-numbers
 // 不带别名
 import * from "./myModule"
 funcA()

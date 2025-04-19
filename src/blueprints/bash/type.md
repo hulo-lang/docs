@@ -14,7 +14,7 @@ license: MIT
 ### 变量赋值
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 $str1 := "Hello"
 let str2 = 'World'
 let str3: str? // 空字符串
@@ -22,7 +22,7 @@ let str4 = "123" as str
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 str1="Hello"
 str2='World'
 str3="" # 空字符串
@@ -39,7 +39,7 @@ str4="123"
 
 @tab 续行符
 
-```json title="huloc.json"
+```json title="huloc.json" :no-line-numbers
 "bash": {
     "multiStringResolution": "symbol"
 }
@@ -47,7 +47,7 @@ str4="123"
 
 @tab Here-String
 
-```json title="huloc.json"
+```json title="huloc.json" :no-line-numbers
 "bash": {
     "multiStringResolution": "Here-String"
 }
@@ -55,7 +55,7 @@ str4="123"
 
 @tab Here-Doc
 
-```json title="huloc.json"
+```json title="huloc.json" :no-line-numbers
 "bash": {
     "multiStringResolution": "Here-Doc"
 }
@@ -63,7 +63,7 @@ str4="123"
 
 @tab ANSI C
 
-```json title="huloc.json"
+```json title="huloc.json" :no-line-numbers
 "bash": {
     "multiStringResolution": "ANSI-C"
 }
@@ -71,7 +71,7 @@ str4="123"
 :::
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 $str := """This is a very very long string
 that continues on the next line
 and still is a single string."""
@@ -84,7 +84,7 @@ echo $str
 
 @tab 续行符
 
-```bash
+```bash :no-line-numbers
 str="This is a \
 multi-line \
 string."
@@ -94,7 +94,7 @@ echo "$str"
 
 @tab Here-String
 
-```bash
+```bash :no-line-numbers
 str=$(cat <<EOF
 This is a
 multi-line
@@ -107,7 +107,7 @@ echo "$str"
 
 @tab Here-Doc
 
-```bash
+```bash :no-line-numbers
 str=$(cat <<'EOF'
 This is a
 multi-line
@@ -120,7 +120,7 @@ echo "$str"
 
 @tab ANSI C
 
-```bash
+```bash :no-line-numbers
 str=$'This is a\nmulti-line\nstring.'
 
 echo "$str"
@@ -131,7 +131,7 @@ echo "$str"
 ### 字符插值
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 $greeting := "Hello"
 $name := "Alice"
 
@@ -139,7 +139,7 @@ $message := "$greeting, $name!"
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 greeting="Hello"
 name="Alice"
 
@@ -147,7 +147,7 @@ message="$greeting, $name!"
 ```
 
 ### 字符串前缀
-```hulo
+```hulo :no-line-numbers
 r""
 c""
 f""
@@ -158,7 +158,7 @@ f""
 ### 变量赋值
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 // 整数赋值
 let num1 = 42
 let num2: num = -17
@@ -178,7 +178,7 @@ sci2=-2.5e-4
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 # 整数赋值
 num1=42
 num2=-17
@@ -198,7 +198,7 @@ sci2=-2.5e-4
 ### 浮点数参与表达式
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 // 使用 bc 或 awk 做浮点计算 (支持运算符重载使用其他工具)
 $result1 := 3.5 + 2.1
 let result2 = -5.2 * 3.1
@@ -206,7 +206,7 @@ let result3: num = 1.23 / 0.0034
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 # 使用 bc 或 awk 做浮点计算 (支持运算符重载使用其他工具)
 result1=$(echo "3.5 + 2.1" | bc)
 result2=$(awk "BEGIN {print -5.2 * 3.1}")
@@ -216,19 +216,19 @@ result3=$(bc <<< "scale=4; 1.23 / 0.0034")
 ### 作为数组元素
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 let numbers: list<num> | num[] = [1, 2.0, -3.14, 4e2, -5.0e-3]
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 numbers=(1 2.0 -3.14 4e2 -5.0e-3)
 ```
 
 ### 条件判断中使用浮点数
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 $x := 2.5
 $y := 2.0
 
@@ -238,7 +238,7 @@ if $x > $y {
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 x=2.5
 y=2.0
 
@@ -250,7 +250,7 @@ fi
 ### 函数参数中的float值
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 fn print_float(f: num) => echo "Received: $f"
 
 print_float 0.123
@@ -259,7 +259,7 @@ print_float 9e-2
 ```
 
 **输出：**
-```bash
+```bash :no-line-numbers
 print_float() {
   echo "Received: $1"
 }
@@ -284,32 +284,26 @@ print_float 9e-2
 
 @tab 数值类型
 
-```json title="huloc.json"
-"bash": {
-    "boolTypeResolution": "number"
-}
+```yaml title="huloc.yaml" :no-line-numbers
+boolTypeResolution: number
 ```
 
 @tab 字符类型
 
-```json title="huloc.json"
-"bash": {
-    "boolTypeResolution": "string"
-}
+```yaml title="huloc.yaml" :no-line-numbers
+boolTypeResolution: string
 ```
 
 @tab 命令类型
 
-```json title="huloc.json"
-"bash": {
-    "boolTypeResolution": "command"
-}
+```yaml title="huloc.yaml" :no-line-numbers
+boolTypeResolution: command
 ```
 :::
 
 
 **输入：**
-```hulo
+```hulo :no-line-numbers
 if true {
   echo "This always runs"
 }
@@ -324,7 +318,7 @@ if false {
 
 @tab 数值类型
 
-```bash
+```bash :no-line-numbers
 if [ 0 -eq 0 ]; then
   echo "This always runs"
 fi
@@ -336,7 +330,7 @@ fi
 
 @tab 字符类型
 
-```bash
+```bash :no-line-numbers
 if [ "true" = "true" ]; then
   echo "This always runs"
 fi
@@ -348,7 +342,7 @@ fi
 
 @tab 命令类型
 
-```bash
+```bash :no-line-numbers
 if true; then
   echo "This always runs"
 fi

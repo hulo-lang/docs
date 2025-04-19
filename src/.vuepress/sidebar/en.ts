@@ -43,6 +43,12 @@ export const enSidebar = sidebar({
         "time",
         "math",
         "fs",
+        "assert",
+        "bash",
+        "powershell",
+        "batch",
+        "vbs",
+        "amber",
       ],
     },
     {
@@ -72,22 +78,22 @@ export const enSidebar = sidebar({
         "expr",
         "branch",
         "loop",
-        "func"
+        "func",
       ]
     },
     {
       text: "Powershell",
       icon: "fa-brands fa-windows",
-      link: "",
+      prefix: "/blueprints/powershell/",
       collapsible: true,
       children: []
     },
     {
       text: "Batch",
       icon: "fa-brands fa-windows",
-      link: "",
+      prefix: "/blueprints/batch/",
       collapsible: true,
-      children: []
+      children: ["type"]
     },
     {
       text: "VBScript",
@@ -99,9 +105,15 @@ export const enSidebar = sidebar({
     {
       text: "Amber",
       icon: "fa-solid fa-diamond",
-      link: "",
+      prefix: "/blueprints/amber/",
       collapsible: true,
-      children: []
+      children: [
+        "type",
+        "expr",
+        "branch",
+        "loop",
+        "func",
+      ]
     },
   ],
   "/demos": "structure",

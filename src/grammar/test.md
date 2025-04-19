@@ -22,7 +22,7 @@ license: MIT
 请不要将测试函数和非测试混合在一个文件中，这样编译器在编译的时候可能会在目标语言生成测试函数的定义。
 :::
 
-```hulo title="math_test.hl"
+```hulo title="math_test.hl" :no-line-numbers
 fn test_add() {
     $a := 1 + 1
     assert_eq(a, 2)

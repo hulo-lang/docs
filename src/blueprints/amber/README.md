@@ -1,0 +1,17 @@
+---
+title: Amber
+icon: fa-solid fa-diamond
+date: 2025-04-19
+category: blueprint
+tag: 
+    - amber
+license: MIT
+---
+
+[Amber](https://amber-lang.com/) is a programming language that compiles to Bash. It's a high level programming language that makes it easy to create shell scripts. It's particularly well suited for cloud services.
+
+Hulo can compile hulo script to amber, and thereby you can get bash from amber script using its compiler.
+
+```cmd
+hulo build . -o amber
+```

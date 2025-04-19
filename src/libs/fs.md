@@ -1,9 +1,8 @@
 ---
 title: File System
 icon: fas fa-file
-category: grammar
+category: lib
 tag:
-    - lib
     - builtin
 license: MIT
 ---
