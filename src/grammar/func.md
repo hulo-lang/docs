@@ -4,7 +4,6 @@ icon: fas fa-superscript
 date: 2025-04-13
 category: grammar
 tag: 
-    - syntax
     - func
 license: MIT
 ---

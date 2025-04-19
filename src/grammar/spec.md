@@ -4,7 +4,6 @@ icon: fas fa-file-alt
 date: 2025-04-13
 category: grammar
 tag: 
-    - syntax
     - spec
 license: MIT
 ---

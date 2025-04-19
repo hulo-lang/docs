@@ -4,7 +4,7 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 import shiki from "./index.js";
 export default hopeTheme({
-  hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
+  hostname: "https://github.com/hulo-lang",
 
   author: {
     name: "The Hulo Authors",
@@ -13,7 +13,7 @@ export default hopeTheme({
 
   logo: "/favicon.ico",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "hulo-lang/docs",
 
   docsDir: "src",
 
@@ -25,7 +25,7 @@ export default hopeTheme({
       // sidebar
       sidebar: enSidebar,
 
-      footer: "Default footer",
+      footer: "❤️ Thank you for your attention.",
 
       displayFooter: true,
 
@@ -44,7 +44,7 @@ export default hopeTheme({
       // sidebar
       sidebar: zhSidebar,
 
-      footer: "默认页脚",
+      footer: "❤️ 感谢您的关注。",
 
       displayFooter: true,
 

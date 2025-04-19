@@ -4,7 +4,6 @@ icon: fas fa-terminal
 date: 2025-04-13
 category: grammar
 tag: 
-    - syntax
     - cmd
 license: MIT
 ---

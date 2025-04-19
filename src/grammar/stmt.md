@@ -4,7 +4,6 @@ icon: fas fa-scroll
 date: 2025-04-13
 category: grammar
 tag: 
-    - syntax
     - stmt
 license: MIT
 ---
