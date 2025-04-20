@@ -188,6 +188,8 @@ let nums = {1, 2}
 let nums = [1, 2]
 ```
 
+## map
+
 ## enum
 
 ### 枚举常量

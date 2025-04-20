@@ -60,6 +60,14 @@ export const enSidebar = sidebar({
       children: ["compiler", "pm", "editor_plugin", "tui", "devops"]
     },
     {
+      text: "Design Pattern",
+      icon: "compass-drafting",
+      prefix: "design/",
+      collapsible: true,
+      link: "/design/",
+      children: []
+    },
+    {
       text: "Feedback",
       icon: "rss",
       link: "https://ecosystem.vuejs.press/plugins/markdown/revealjs/demo.html",

@@ -85,9 +85,9 @@ loop (i: num, v: num) in $arr {
 ```
 
 ### 数值遍历
-```hulo :no-line-numbers
+```hulo
 // 从 1 遍历到 5，步长为 0.1
-loop i in range(1, 5, 0.1) {
+loop $i in 1..5..0.1 {
     echo $i
 }
 ```
