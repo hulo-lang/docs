@@ -11,7 +11,7 @@ license: MIT
 >An annotation is a form of metadata in programming languages, typically used to add supplementary information to a program without directly affecting its logic or execution. Annotations can be applied to classes, methods, variables, or other elements to support compile-time checks, runtime processing, or documentation generation. They are often used in frameworks or libraries for dependency injection, configuration, and code generation.
 
 ::: important
-In hulo annotations are the same concept as macros. Therefore, you can call macro or annotation.
+In Hulo annotations are the same concept as macros. Therefore, you can call macro or annotation.
 :::
 
 ## 不带参数的
