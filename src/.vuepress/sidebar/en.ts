@@ -29,6 +29,7 @@ export const enSidebar = sidebar({
         "generics",
         "macro",
         "metadata",
+        "unsafe",
         "async",
         "test",
       ],
