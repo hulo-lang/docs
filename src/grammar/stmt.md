@@ -79,15 +79,15 @@ type Releaser = { Package.install, Package.init  }
 
 #### 条件类型
 ```hulo
-type IsString<T> = T extends str ? "yes" : "no"
+type IsString<T> = T is str ? "yes" : "no"
 
 type A = IsString<str> // "yes"
 type B = IsString<num> // "no"
 
 type TypeChecker<T> = 
-    T extends str ? "string" :
-    T extends num ? "number" :
-    T extends bool ? "boolean" :
+    T is str ? "string" :
+    T is num ? "number" :
+    T is bool ? "boolean" :
     "null";
 
 type A = TypeChecker<str>;  // "string"
@@ -127,20 +127,6 @@ let a = 10
 var b = 10
 const c = 10
 ```
-
-```
-let (
-    a = 10
-    b = 3.14
-    c = "Hello World"
-)
-
-const (
-    d = 1
-)
-```
-
-## defer
 
 ## use
 ```hulo
