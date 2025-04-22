@@ -68,7 +68,10 @@ ${Option Explicit}
 @tab amber
 
 ```hulo
-
+${#[allow_nested_if_else]}
+fn foo() {
+    // ...
+}
 ```
 
 :::
@@ -102,7 +105,10 @@ Option Explicit
 
 @tab amber
 ```amber
-
+#[allow_nested_if_else]
+fun foo() {
+    // ...
+}
 ```
 
 :::

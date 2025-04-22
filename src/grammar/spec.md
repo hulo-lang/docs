@@ -90,19 +90,19 @@ enum UserRole {
 
 ## 注释
 
-```hulo :no-line-numbers
+```hulo
 // 这是一个单行注释
 ```
 
 如果对同一个表达式/语句注释的过长，请不要使用多个单行注释，而是使用多行注释以代之。
-```hulo :no-line-numbers
+```hulo
 /**
  * 这是多行注释
  */
 ```
 
 ## 示例
-```hulo :no-line-numbers
+```hulo
 const DEFAULT_RETRIES: num = 3
 
 class DatabaseConfig {

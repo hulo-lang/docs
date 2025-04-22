@@ -1,6 +1,11 @@
 ---
-title: Metadata
-icon: fas fa-puzzle-piece
+title: Reflect
+icon: expand
+date: 2025-04-22
+category: lib
+tag:
+    - reflect
+license: MIT
 ---
 
 ## Class
