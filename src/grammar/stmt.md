@@ -154,3 +154,5 @@ impl myecho for echo {
 // myecho 类型等于echo类型排除某个构造函数
 use myecho = Exculde<echo, myecho() | myecho(eval)> & Pick<myecho, myecho() | myecho(eval)>
 ```
+
+### extends

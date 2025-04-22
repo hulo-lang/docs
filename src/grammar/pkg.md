@@ -8,17 +8,32 @@ tag:
 license: MIT
 ---
 
-## pub
-pub 关键字用于标注表达式/语句是否可导出。默认情况下，没有pub标记的表达式/语句是无法供外部访问的。
-```hulo :no-line-numbers
-pub var PI = 3.14
+## 代码可见性
 
-pub fn sayHello() {
+在 Hulo 中，模块成员的默认可见性是私有的。你需要使用 `pub` 关键字将模块、函数、变量等标记为公开成员，以便其他模块能够访问它们。
+
+```hulo
+pub const PI = 3.14
+
+pub fn say_hello() {
     echo("Hello World")
 }
 ```
 
-## import
+## 包
+
+假设我们有如此项目：
+```
+.
+├── main.hl
+└── math/
+    ├── mod.hl
+    ├── add.hl
+    └── geometry/
+        ├── mod.hl
+        └── circle.hl
+```
+
 对于被 `pub` 标记的表达式/语句，便可以用 import 关键字在外部引入，且在声明的时候省略 `.hl` 扩展文件名。
 
 ### 直接执行模块（不导入）
@@ -56,6 +71,12 @@ import * as myModule from "./myModule"
 myModule.funcA()
 myModule.funcB()
 ```
+
+### 路径引入
+
+### 
+
+### 库
 
 ## 模块
 

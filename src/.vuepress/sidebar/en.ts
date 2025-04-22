@@ -28,7 +28,7 @@ export const enSidebar = sidebar({
         "trait",
         "generics",
         "comptime",
-        "macro",
+        "annotation",
         "unsafe",
         "async",
         "test",
