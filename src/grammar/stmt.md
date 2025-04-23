@@ -79,15 +79,15 @@ type Releaser = { Package.install, Package.init  }
 
 #### 条件类型
 ```hulo
-type IsString<T> = T is str ? "yes" : "no"
+type IsString<T> = T extends str ? "yes" : "no"
 
 type A = IsString<str> // "yes"
 type B = IsString<num> // "no"
 
 type TypeChecker<T> = 
-    T is str ? "string" :
-    T is num ? "number" :
-    T is bool ? "boolean" :
+    T extends str ? "string" :
+    T extends num ? "number" :
+    T extends bool ? "boolean" :
     "null";
 
 type A = TypeChecker<str>;  // "string"
@@ -99,8 +99,18 @@ type D = TypeChecker<null>; // "null"
 #### Pick
 ```hulo
 type Pick<T, K in keyof T> = {
-    
+    [P in K]: T[P]
 }
+```
+
+#### Exclude
+```hulo
+type Exclude<T, K> = T extends K ? void: T
+```
+
+#### Omit
+```hulo
+type Omit<T, K> = Pick<T, Exclude<T, K>>
 ```
 
 #### Partial
