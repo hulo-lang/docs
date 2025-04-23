@@ -67,52 +67,214 @@ let m: map<str, num> = null
 m?.["a"].to_str()
 ```
 
-## Collections
+
+## 数组
+
+**基本特性**
+
+* 有序集合
+* 可变长度
+* 类型统一
+
+**类型声明**
+
 ```hulo
-// array
-let arr: num[3]
+let numbers: num[] = [1, 2, 3]
 
-arr[2] = 5
-arr[3] = 10 // error
+let names: list<str> = ["Alice", "Bob"]
 
-// list
-let a: list<num> | num[] = [1, 2, 3]
-
-// triple
-let b: triple<num> = (1, 2, 3)
-
-// set
-let c: set<num> = {1, 2, 3}
+let ranges: list<num> = [1..10] // 范围初始化
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-## Map
+**访问元素**
 
-## Enum
+同绝大部分编程语言一样，Hulo 的数组首元素也从 0 开始计算
+```hulo
+$names[0] // "Alice"
 
->**Enumeration** is a data type used to define a set of named constants. Each enum value has a unique name, typically representing a fixed, meaningful set of options. Enums improve code readability and maintainability by avoiding the use of magic numbers or hardcoded strings.
+$numbers[3] // 越界异常，有效取值 0 - 2
+```
+
+**切片**
 
 ```hulo
-// stimulate by union type
-type Protocal = 'tcp' | 'udp'
+$numbers[1..] // [2, 3]
+$numbers[0..1] // [1, 2]
+$numbers[..-1] // [3, 2, 1]
+```
 
-// method 1
-enum Protocal {
-    tcp, udp
+## 元组
+
+**基本特征**
+
+* 固定长度：声明时确定元素数量和类型
+* 异构元素：允许不同类型组合
+* 结构绑定：支持解构赋值
+
+**类型声明**
+```hulo
+// 显式类型
+let person: [str, num] = ["Alice", 30]
+
+// 命名元组（可选特性）
+let point: (x: num, y: num) = (10, 20)
+```
+
+**访问元素**
+```hulo
+$person.0 // "Alice"
+$point.y // 20
+```
+
+**解构赋值**
+```hulo
+let (name, age) = $person
+```
+
+**更新元素**
+```hulo
+$person.0 = "Bob"
+
+$person.with(1, 20)
+```
+
+**模式匹配**
+```hulo
+match $point {
+    (0, 0) => echo "原点",
+    (x, 0) => echo "X轴",
+    (0, y) => echo "Y轴",
+    _ => echo "其他位置"
 }
+```
 
-Protocal::tcp
+## 集合
 
-// method 2
-enum Protocal {
-    port: num
+**基本特性**
 
-    tcp(6),
+* 唯一性：自动去重
+* 无序存储：不保证遍历顺序
+
+**类型声明**
+```hulo
+let ids: set<num> = {1, 2, 3}
+
+$flags := {"read", "write"}
+```
+
+**添加元素**
+```hulo
+$ids.add(4)
+```
+
+**删除元素**
+```hulo
+$flags.remove("read")
+```
+
+**存在检查**
+```hulo
+$ids.has(2) // true
+
+$ids.has("read") // 错误，ids 带有 num 类型约束
+```
+
+**集合运算**
+```hulo
+let a = {1, 2, 3}
+let b = {3, 4, 5}
+
+$a.union(b)       // {1, 2, 3, 4, 5}
+$a.intersect(b)   // {3}
+$a.difference(b)  // {1, 2}
+```
+
+## 字典
+
+`map` 是一种键值对集合类型，提供高效的查找、插入和删除操作。
+
+可以以下语法创建一个字典：
+```hulo
+let m: map<str, > = {
+  "key1": "value1",
+  "key2": "value2"
+}
+```
+
+### 访问值
+
+```hulo
+echo $m["key1"] // value1
+```
+
+## 枚举
+
+
+### 基础枚举（Basic Enum）
+
+在 Hulo 语言中，基础枚举可以支持多种灵活的初始化方式，以下是完整的语法规范和示例：
+
+**标准数字枚举：**
+```hulo
+enum Status {
+    Pending,    // 0
+    Approved,   // 1
+    Rejected    // 2
+}
+```
+
+**显式数字赋值：**
+```hulo
+enum HttpCode {
+    OK = 200,
+    NotFound = 404,
+    ServerError = 500,
+    GatewayTimeout  // 自动赋值为 501（前值+1）
+}
+```
+
+**字符串枚举：**
+```hulo
+enum Direction {
+    North = "N",
+    South = "S",
+    East = "E",
+    West = "W"
+}
+```
+
+**混合类型枚举：**
+```hulo
+enum Config {
+    RetryCount = 3,
+    Timeout = "30s",
+    EnableLogging = true
+}
+```
+
+### 关联值枚举（Associated Value Enum）
+
+```hulo
+enum Protocol {
+    port: num  // 关联字段声明
+
+    tcp(6),    // 枚举值携带数据
     udp(17);
 }
 
-Protocal::tcp.port
-Protocal::udp
-Protocal::udp.index
+// 使用
+let p = Protocol::tcp(6)
+echo p.port  // 访问关联字段
+```
+
+### 代数数据类型（ADT）
+
+```hulo
+enum NetworkPacket {
+    TCP { src_port: num, dst_port: num },
+    UDP { port: num, payload: str }
+}
 ```
 
 ## Class

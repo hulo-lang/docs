@@ -51,9 +51,61 @@ Hulo 支持通过特殊格式的注释来传递构建指令，例如目标平台
 
 在上面的例子中，`bash@4.0` 指定了目标平台及其版本，而 `--path /bin/bash` 则作为构建参数传递给后端工具，用于调整生成逻辑或路径配置。这种方式可用于平台差异适配、多版本支持、插件切换等高级用法。
 
+
+## 作用域
+
+### let
+
+* 作用域范围：仅在声明所在的 `{}` 块内有效
+* 重新赋值：允许
+* 重复声明：禁止（同作用域内）
+```hulo
+{
+  let a = 10
+  echo $a // 
+  $a = 20
+}
+
+echo $a // null
+```
+
+### var
+
+* 作用域范围：跨所有代码块，直到文件/函数结束
+* 重新赋值：允许
+* 重复声明：允许（会覆盖前值）
+```hulo
+{
+  var a = 10
+  echo $a // 10
+  $a = 20
+}
+
+echo $a // 20
+```
+
+### const
+
+* 作用域范围：同 `let`，仅在声明块内有效
+* 重新赋值：禁止
+* 重复声明：禁止
+```hulo
+{
+  const a = 10
+  echo $a // 10
+  $a = 20 // 错误
+}
+
+echo $a // null
+```
+
 ## type
 
-#### 类型别名
+::: tip
+在 Hulo 中的类型系统类似于 `Typescript`，引入这套系统主要是为了实现对命令的抽象。除了 `type` 关键字外，`use` 关键字也支持相应的类型系统。关于 `use` 的详解，我们会在命令章节娓娓道来。
+:::
+
+### 类型别名
 ```hulo
 type int = num
 type float = num
@@ -62,7 +114,7 @@ let i: int = 1
 const PI: float = 3.14
 ```
 
-#### 联合类型
+### 联合类型
 ```hulo
 type A = num | str | bool
 type B = num & str
@@ -77,12 +129,265 @@ type Function<T, R> = (arg: T) => R;
 type Releaser = { Package.install, Package.init  }
 ```
 
-#### 条件类型
-```hulo
-type IsString<T> = T extends str ? "yes" : "no"
+### 复合类型基础
 
-type A = IsString<str> // "yes"
-type B = IsString<num> // "no"
+**never**
+`never` 是类型系统中的一个特殊类型，表示**永远不可达的值或永不返回的操作**。
+
+* 在类型运算中排除某些情况
+```hulo
+type NonNull<T> = T extends null ? never : T
+```
+
+* 表示不可能的分支
+```hulo
+type Shape = Circle | Square
+fn getArea(s: Shape): num {
+    if (s is Circle) {
+        return s.radius * s.radius * 3.14
+    } else if (s is Square) {
+        return s.size * s.size
+    } else {
+        // 这里s的类型是never
+        // 表示所有可能情况都已处理
+    }
+}
+```
+
+**[key in T]**
+
+遍历 `T` 本身（需 `T` 是联合类型），生成键名来自 `T` 成员的新类型。
+
+```hulo
+type Protocal = 'udp' | 'tcp'
+```
+对于 `Protocal` 的遍历将依次得到 `udp`、`tcp` 的键名：
+```hulo
+type ProtocalNo = {
+  [K in Protocal]: num
+}
+/* 结果：
+type ProtocalNo {
+  udp: num
+  tcp: num
+}
+*/
+```
+
+**[key in keyof T]**
+
+遍历类型 `T` 的所有**属性名（键）**，生成新的映射类型。
+
+```hulo
+class User {
+  name: str
+  age: num
+}
+```
+对于 `User` 类型，遍历的所有属性名为 `name`、 `age`
+```hulo
+type UserClone<T extends User> = {
+  [K in keyof T]: T[K]
+}
+/* 结果：
+type UserClone {
+  name: str
+  age: num
+}
+*/
+```
+
+**T[K]**
+
+通过键名 `K` 获取类型 `T` 中对应属性的类型。
+
+```hulo
+type User = {
+  name: str
+  age: num
+}
+
+type NameType = User["name"]  // str
+
+type AgeType = User["age"]   // num
+```
+::: tip
+* `K` 必须是 `T` 的已知键名（或联合键名）
+* 支持嵌套访问（如 `T["a"]["b"]`）
+:::
+
+**extends**
+
+用于对类型进行条件限制或继承。
+
+* 泛型约束
+```hulo
+// 确保 T 必须包含 id 属性
+type WithId<T extends { id: str }> = T
+
+// 合法
+type Valid = WithId<{ id: "123", name: str }>
+
+// 非法（缺少 id）
+type Invalid = WithId<{ name: str }>
+```
+
+* 条件判断
+```hulo
+// 若 T 是 num 则返回 str，否则返回 bool
+type TypeCheck<T> = T extends num ? str : bool
+
+type A = TypeCheck<10>     // str
+type B = TypeCheck<"hello"> // bool
+```
+
+::: tip
+在 Hulo 中 `extends` 关键字还用于类的继承
+:::
+
+### ValueOf
+
+**类型签名：**
+```hulo
+type ValueOf<T> = T[keyof T]
+```
+
+**示例：**
+```hulo
+class Foo {
+  a: num
+  b: str
+}
+
+type FooValues = ValueOf<Foo> // num | str
+```
+
+### Readonly
+
+将 `T` 的所有属性变为只读。
+
+**类型签名：**
+
+```hulo
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P]
+}
+```
+
+**示例：**
+```hulo
+class Config {
+  timeout: num
+}
+type ImmutableConfig = Readonly<Config>  // { readonly timeout: num }
+```
+
+### Partial
+
+`Partial<T>` 是一个**实用工具类型**，用于将类型 `T` 的所有属性变为**可选属性**。它特别适用于需要处理对象部分更新的场景。
+
+**类型签名：**
+```hulo
+type Partial<T> = {
+  [P in keyof T]?: T[p] // 将 T 的每个属性 P 标记为可选
+}
+```
+
+**示例：**
+```hulo
+class User {
+  name: str
+  age: num
+}
+
+type PartialUser = Partial<User> // { name?: str, age?: num }
+```
+
+### Pick
+
+从类型 `T` 中选取一组属性 `K` 组成新类型。
+
+**类型签名：**
+```hulo
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P]
+}
+```
+
+**示例：**
+```hulo
+class User {
+  id: str
+  name: str
+  age: num
+  email: str
+}
+
+type UserBasicInfo = Pick<User, "id" | "name">
+/* 结果：
+type UserBasicInfo = {
+  id: str
+  name: str
+}
+*/
+```
+
+### Exclude
+
+从类型 `T` 中排除可赋值给 `U` 的类型。
+
+**类型签名：**
+```hulo
+type Exclude<T, U> = T extends U ? never : T
+```
+
+**示例：**
+```hulo
+type Allowed = num | str | bool
+type NoStrings = Exclude<Allowed, str>  // num | bool
+```
+
+### Omit
+
+从类型 `T` 中排除一组属性 `K` 组成新类型。
+
+**类型签名：**
+```hulo
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+```
+
+**示例：**
+```hulo
+// 排除敏感字段
+type SafeUser = Omit<User, "email" | "id">
+/* 结果：
+type SafeUser = {
+  name: str
+  age: num
+}
+*/
+```
+
+### If
+
+在类型系统中实现条件逻辑，类似于三元表达式，但作用于类型层面。
+
+**类型签名：**
+```hulo
+type If<Condition, Then, Else> = Condition extends true ? Then : Else
+```
+
+**示例：**
+```hulo
+type IsNumber<T> = T extends num ? true : false
+type Result = If<IsNumber<str>, "Yes", "No">  // "No"
+
+type Status = "success" | "error"
+type Message<T> = If<
+  T extends "success", 
+  { code: 200 }, 
+  { code: 500 }
+>
 
 type TypeChecker<T> = 
     T extends str ? "string" :
@@ -96,47 +401,92 @@ type C = TypeChecker<bool>; // "boolean"
 type D = TypeChecker<null>; // "null"
 ```
 
-#### Pick
+### Merge
+
+合并两个类型 `T` 和 `U` 的属性，`U` 的同名属性会覆盖 `T`。
+
+**类型签名：**
 ```hulo
-type Pick<T, K in keyof T> = {
-    [P in K]: T[P]
+type Merge<T, U> = {
+  [K in keyof T | keyof U]:
+    K extends keyof U ? U[K] :
+    K extends keyof T ? T[K] :
+    never
 }
 ```
 
-#### Exclude
+**示例：**
 ```hulo
-type Exclude<T, K> = T extends K ? void: T
+type A = { name: str; age: num }
+type B = { age: str; email: str }
+
+type C = Merge<A, B>
+/* 结果：
+{
+  name: str
+  age: str  // 被 B 覆盖
+  email: str
+}
+*/
 ```
 
-#### Omit
+### Diff
+
+找出 `T` 中存在但 `U` 中不存在的属性。
+
+**类型签名：**
 ```hulo
-type Omit<T, K> = Pick<T, Exclude<T, K>>
+type Diff<T, U> = {
+  [K in Exclude<keyof T, keyof U>]: T[K]
+}
 ```
 
-#### Partial
+**示例：**
+```hulo
+type User = { id: str; name: str; age: num }
+type UpdatedUser = { id: str; name: str }
+
+type ChangedFields = Diff<User, UpdatedUser>
+/* 结果：
+{
+  age: num  // 只有 User 有
+}
+*/
+```
+
+### Mutable
+
+将类型 `T` 的所有 `readonly` 属性变为可变属性，移除所有属性的只读修饰符。
+
+**类型签名：**
+```hulo
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
+```
+
+**示例：**
+```hulo
+class ImmutableConfig {
+  readonly timeout: num
+  readonly retries: num
+}
+
+type EditableConfig = Mutable<ImmutableConfig>
+/* 结果：
+{
+  timeout: num
+  retries: num
+}
+*/
+```
+
+### NonNullable
 ```hulo
 
 ```
 
-#### Require
-```hulo
-
-```
-
-#### NonNullable
-```hulo
-
-```
-
-#### Exclude
-
-## 作用域
-
-```hulo
-let a = 10
-var b = 10
-const c = 10
-```
+### Exclude
 
 ## use
 ```hulo
