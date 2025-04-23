@@ -14,20 +14,20 @@ license: MIT
 * 避免使用单字母变量名（除非是循环变量 i, j, k）。
 * 不要使用缩写，除非是广泛接受的缩写（如 id, url, cpu）。
 * 布尔变量尽量使用 is_ / has_ / can_ 开头，如：
-```hulo :no-line-numbers
+```hulo
 let is_enabled: bool = true
 let has_access: bool = false
 let can_execute: bool = true
 ```
 * 计数器变量以 _count 结尾：
-```hulo :no-line-numbers
+```hulo
 let user_count: num = 100
 let retry_count: num = 3
 ```
 
 ## 常量命名规则
 * 使用 UPPER_CASE_SNAKE_CASE：
-```hulo :no-line-numbers
+```hulo
 const MAX_RETRY: num = 5
 const DEFAULT_TIMEOUT: num = 30
 const PI: num = 3.141592653
@@ -35,13 +35,13 @@ const PI: num = 3.141592653
 
 ## 函数 & 方法命名
 * 使用 snake_case，动词开头：
-```hulo :no-line-numbers
+```hulo
 fn get_user_name(user_id: num) -> str
 fn send_request(url: str) -> response
 fn validate_email(email: str) -> bool
 ```
 * 如果是 setter/getter，使用 set_ / get_ 前缀：
-```hulo :no-line-numbers
+```hulo
 fn set_username(new_name: str)
 fn get_username() -> str
 ```
@@ -51,7 +51,7 @@ fn get_username() -> str
 * builtin的基础类型都统一为小写, str、num、list、map、any...
 * 命令名非必要都使用小写
 
-```hulo :no-line-numbers
+```hulo
 cmd mycommand {
     cmd init {}
 
@@ -60,7 +60,7 @@ cmd mycommand {
 ```
 
 * 类名使用 PascalCase, 字段使用 snake_case：
-```hulo :no-line-numbers
+```hulo
 class UserProfile {
     username: str
     email: str
@@ -71,7 +71,7 @@ class UserProfile {
 ## 枚举命名
 
 * 枚举类型使用 PascalCase，枚举项使用 SCREAMING_SNAKE_CASE：
-```hulo :no-line-numbers
+```hulo
 enum UserRole {
     ADMIN
     EDITOR

@@ -8,13 +8,69 @@ tag:
 license: MIT
 ---
 
-## Number
+## num
+
+在 Hulo 中，`num` 是用于表示**数值类型**的内建类型，涵盖了整数与浮点数。
+
+### 基础用法
 ```hulo
-let a: num = -10
-let pi = 3.14
+// 整数
+let num1 = 42
+let num2: num = -17
+
+type float = num
+
+// 浮点数
+$float1 := 3.14
+let float2 = -0.001
+let float3: num = 0.0
+$float4 := 0.5 as float
+let float5: float = 5.0
 ```
 
-## String
+### 算术运算
+
+`num` 类型支持常见的算术运算符：
+```hulo
+1 + 2        // 加法 -> 3
+4 - 2        // 减法 -> 2
+3 * 5        // 乘法 -> 15
+10 / 2       // 除法 -> 5.0
+7 % 3        // 取余 -> 1
+2 ** 3       // 幂运算 -> 8
+10 // 3      // 整除 -> 3
+```
+
+### 科学计数法
+
+Hulo 的 `num` 类型支持科学计数法（Scientific Notation），可用于表示非常大的或非常小的数值：
+```hulo
+let a = 1e3      // 1000.0
+let b = 5.2e-2   // 0.052
+let c: num = 3.14e6
+```
+
+::: tip
+* `e` 或`E` 表示 10 的指数幂。
+* 指数部分可以为正也可以为负。
+:::
+
+### 进制表示
+
+```hulo
+let a = 0b1010    // 二进制，等于 10
+let b = 0o77      // 八进制，等于 63
+let c = 0xFF      // 十六进制，等于 255
+let d = 42        // 十进制，等于 42
+```
+
+::: tip
+`0b` 或 `0B` 开头：二进制（binary）
+`0o` 或 `0O` 开头：八进制（octal）
+`0x` 或 `0X` 开头：十六进制（hexadecimal）
+:::
+
+## str
 
 ### basic
 ```hulo
@@ -46,9 +102,15 @@ let c = 10
 echo "c is $c" // c is 10
 ```
 
-## Bool
+## bool
 
-## Null
+`bool` 是布尔类型，只能取两个值之一：
+```hulo
+true  // 表示真
+false // 表示假
+```
+
+## null
 ```hulo
 let s: str?
 
@@ -277,7 +339,7 @@ enum NetworkPacket {
 }
 ```
 
-## Class
+## class
 
 >**class** is a fundamental concept in Object-Oriented Programming (OOP). It acts as a blueprint or template for creating objects that share the same properties and behaviors. A class defines the attributes (state) and methods (behaviors) of objects. Once a class is defined, objects can be created through instantiation.
 

@@ -4,7 +4,9 @@ icon: fas fa-box
 date: 2025-04-13
 category: grammar
 tag: 
-    - pkg
+    - pub
+    - import
+    - mod
 license: MIT
 ---
 
@@ -50,17 +52,17 @@ import "./setup"
 * 必须使用模块原本的名称
 * 支持解构风格导入
 :::
-```hulo :no-line-numbers
+```hulo
 import { funcA, funcB } from "./myModule"
 ```
 
 🔹 重命名导入（别名）
-```hulo :no-line-numbers
+```hulo
 import { funA as A } from "./myModule"
 ```
 
 🔹 导入所有导出
-```hulo :no-line-numbers
+```hulo
 // 不带别名
 import * from "./myModule"
 funcA()
