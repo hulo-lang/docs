@@ -4,11 +4,14 @@ icon: fas fa-repeat
 date: 2025-04-13
 category: grammar
 tag: 
-    - flow
+    - condition
+    - loop
+    - try
+    - defer
 license: MIT
 ---
 
-> 控制流（Control Flow）是编程语言中用于控制代码执行顺序的核心机制。它决定了哪些语句执行、何时执行、是否重复执行等。
+> `控制流` 是指控制程序逻辑执行的**先后顺序**，涉及数据在逻辑处理过程中的形式和状态变化。它决定了哪些语句执行、何时执行、是否重复执行等。
 
 ## 条件判断
 

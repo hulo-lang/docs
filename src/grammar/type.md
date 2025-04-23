@@ -196,7 +196,7 @@ $a.difference(b)  // {1, 2}
 
 可以以下语法创建一个字典：
 ```hulo
-let m: map<str, > = {
+let m: map<str, str> = {
   "key1": "value1",
   "key2": "value2"
 }
