@@ -489,30 +489,65 @@ type EditableConfig = Mutable<ImmutableConfig>
 ### Exclude
 
 ## use
+
+在 Hulo 语言中，`use` 是用于命令组合的核心语法结构，与 `type` 形成对称设计。
+
+在开始前假设我们有这样一个命令特征：
 ```hulo
-cmd myecho {
-    @flag
-    eval: bool
+@command
+trait Placeholder {
+  readonly a: num
+  readonly b: str
 
-    @flag
-    format: bool
+  Placeholder()
 
-    @param
-    message: str
+  Placeholder(a)
 
-    myecho() {}
-
-    myecho(eval) {}
-
-    myecho(eval, format) {}
+  Placeholder(a, b)
 }
-
-impl myecho for echo {
-    ...
-}
-
-// myecho 类型等于echo类型排除某个构造函数
-use myecho = Exculde<echo, myecho() | myecho(eval)> & Pick<myecho, myecho() | myecho(eval)>
 ```
 
-### extends
+以及以下实现该特征的命令:
+```hulo
+impl Placeholder for Foo, Bar, Baz;
+```
+
+### 基础用法
+
+在默认情况下 Hulo 会选择首次匹配的实现类作为默认命令。
+```hulo
+Placeholder -a 10 -b "abc" // Foo -a 10 -b "abc"
+```
+
+指定命令
+```hulo
+use Placeholder = Bar;
+Placeholder -a 10 -b "abc" // Bar -a 10 -b "abc"
+```
+
+### 命令组合
+```hulo
+use Placeholder = Exclude<Bar, Placeholder()> & Baz
+
+Placeholder // Baz
+Placeholder -a 10 -b "abc" // Bar -a 10 -b "abc"
+```
+
+### 模式匹配
+```hulo
+use Placeholder = Bar(_) & Baz
+```
+
+匹配规则：
+没有扩展包裹代表全部匹配
+参数匹配需要以 ( ) 包裹匹配规则
+
+(_) 代表匹配待参数的所有可能
+(_, _) 代表匹配带两个参数的所有可能
+(a, b) 代表匹配入参名字为 a 和 b 的所有可能
+(_, b) 代表匹配首参数任意，第二个参数为 b
+(_, b | c) 代表匹配首参数任意，第二个参数为 b 或 c 组合
+(_, ~b) 代表匹配首参数任意，第二个参数除去 b
+(_, ~b & c) 代表首参数任意，第二个参数除去 b 但是要包含 c
+
+## extension

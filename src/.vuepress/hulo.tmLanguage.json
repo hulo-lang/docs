@@ -215,7 +215,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.hulo",
-					"match": "\\b(mod|part|use|class|enum|trait|cmd|fn|let|var|const|import|is|as|extends|from|type|typeof|operator|impl|for|extend|try|catch|finally|defer|throw|throws|if|else|match|do|loop|in|range|return|break|continue|comptime|unsafe|extern|declare|async|await)\\b"
+					"match": "\\b(mod|part|use|class|enum|trait|cmd|fn|let|var|const|import|is|as|from|type|typeof|operator|impl|for|extends|extension|try|catch|finally|defer|throw|throws|if|else|match|do|loop|in|range|return|break|continue|comptime|unsafe|extern|declare|async|await)\\b"
 				},
 				{
 					"name": "keyword.operator.new",

@@ -8,7 +8,7 @@ tag:
 license: MIT
 ---
 
->**trait** is a structure that defines class's members and method signatures, used to specify a contract for certain behaviors or functionalities. It is similar to the traditional interface in object-oriented programming, but usually does not contain method implementations. Any type that implements a trait must provide concrete method implementations. trait is mainly used to define a set of methods that need to be shared across multiple classes or structures, enabling code reuse and structured design.
+> `trait` is a structure that **defines class's members and method signatures**, used to **specify a contract for certain behaviors or functionalities**. It is similar to the traditional interface in object-oriented programming, but usually does not contain method implementations.
 
 ## 特征中的方法定义
 
