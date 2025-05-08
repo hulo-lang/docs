@@ -45,7 +45,7 @@ export const zhSidebar = sidebar({
         "time",
         "math",
         "fs",
-        "assert",
+        "testify",
         "reflect",
         "bash",
         "powershell",

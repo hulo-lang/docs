@@ -1,5 +1,5 @@
 ---
-title: Assert
+title: Testify
 icon: fas fa-triangle-exclamation
 date: 2025-04-19
 category: lib
@@ -8,7 +8,7 @@ tag:
 license: MIT
 ---
 
->Assert 库是一类在编程中广泛用于单元测试的工具库，它的核心功能是提供一组断言（assertions）函数，用于验证程序在特定条件下的行为是否正确。
+>Testify 库是一类在编程中广泛用于单元测试的工具库，它的核心功能是提供一组断言（assertions）函数，用于验证程序在特定条件下的行为是否正确。
 >当你在编写测试用例时，Assert 库能帮你明确地表达期望值与实际结果之间的关系。如果某个断言失败，测试框架就会报告一个错误，从而提示开发者代码存在潜在问题。
 
 ::: important

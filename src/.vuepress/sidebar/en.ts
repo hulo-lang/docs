@@ -44,7 +44,7 @@ export const enSidebar = sidebar({
         "time",
         "math",
         "fs",
-        "assert",
+        "testify",
         "reflect",
         "bash",
         "powershell",

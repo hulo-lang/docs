@@ -9,12 +9,12 @@ heroImageStyle:
 tagline: Hulo 是一门专为批处理设计的编程语言，可编译为 Bash、PowerShell 和 VBS 等原生系统级脚本语言。
 actions:
   - text: 立即开始
-    link: ./demo/
+    link: ./guide/
     icon: signs-post
     type: primary
 
   - text: 文档
-    link: ./guide/
+    link: ./grammar/
 
 highlights:
 
@@ -22,51 +22,51 @@ highlights:
     features:
       - title: 跨平台
         icon: network-wired
-        details: Compiles to multiple shell languages including Bash, PowerShell, and VBS ...
+        details: 编译成多种批处理语言，如 Bash, PowerShell, 及 VBS ...
         link: 
 
       - title: 现代语法
         icon: code
-        details: Clean, expressive syntax similar to modern programming languages, eliminating traditional shell scripting quirks
+        details: 同现代编程语言类似的易于表达的语法，消除传统 Shell 脚本古怪的特性
         link: 
 
       - title: 类型安全
         icon: circle-info
-        details: Strong static typing system to catch errors at compile time rather than runtime
+        details: 强大的静态类型系统，在编译时捕获错误，而不是在运行时捕获错误
         link: 
 
       - title: 命令提示
         icon: comment-dots
-        details: Intelligent code completion and inline documentation for all commands and APIs
+        details: 智能代码补全和对命令及API内置文档
         link: 
 
       - title: 原生支持
         icon: puzzle-piece
-        details: Allows embedding of unsafe native code blocks when direct system access is required
+        details: 支持嵌入不安全的原生代码块
         link: 
 
       - title: 安全特性
         icon: lock
-        details: Built-in error handling with try-catch mechanisms and automatic resource cleanup
+        details: 内置基于 try-catch 的错误处理机制以及自动资源回收
         link: 
 
       - title: 元编程
         icon: diagram-project
-        details: Advanced metaprogramming capabilities through compile-time code generation and analysis
+        details: 基于编译时代码生成和分析的高级元编程功能
         link: 
 
   - header: 工具链
-    description: Awesome and powerful extensions for Hulo
+    description: Hulo 的强大扩展
     image: /assets/image/box.svg
     highlights:
       - title: 编译器
         icon: fa-tools
-        details: Hulo Compiler - Transpiles high-level Hulo code into Bash, PowerShell, VBScript, and Batch for seamless cross-platform automation scripting
+        details: Hulo 编译器 - Transpiles high-level Hulo code into Bash, PowerShell, VBScript, and Batch for seamless cross-platform automation scripting
         link: /toolchain/compiler
 
       - title: hlpm
         icon: fa-solid fa-cube
-        details: Hulo Package Manager - Dependency management tool with version resolution and private registry support
+        details: Hulo 包管理 - 具有解析版本和自建私有仓库能力的依赖管理工具
         link: /toolchain/pm
 
       - title: 编辑器插件
