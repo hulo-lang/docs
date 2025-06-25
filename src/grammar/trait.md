@@ -82,8 +82,8 @@ trait Service {
 以 GameService 为例，实现新扩展的行为如下：
 ```hulo
 impl Service for GameService {
-    get port => 30000
-    get name => "GameService"
+    get port() => 30000
+    get name() => "GameService"
 }
 ```
 
@@ -159,7 +159,7 @@ impl Pingable for Device {}
 当你调用：
 ```hulo
 let dev: Pingable = new Device()
-dev.ping() // 输出: default ping
+$dev.ping() // 输出: default ping
 ```
 
 如果你希望自定义行为，也可以覆盖默认实现：
