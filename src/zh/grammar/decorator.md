@@ -1,5 +1,5 @@
 ---
-title: 注解
+title: 装饰器
 icon: fas vr-cardboard
 date: 2025-04-19
 category: grammar

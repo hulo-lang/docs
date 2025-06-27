@@ -28,7 +28,7 @@ export const zhSidebar = sidebar({
         "trait",
         "generics",
         "comptime",
-        "annotation",
+        "decorator",
         "unsafe",
         "async",
         "test",

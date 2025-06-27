@@ -8,12 +8,12 @@ export default defineUserConfig({
     "/": {
       lang: "en-US",
       title: "Hulo",
-      description: "A docs demo for vuepress-theme-hope",
+      description: "✨ The official documentation site for the Hulo programming language.",
     },
     "/zh/": {
       lang: "zh-CN",
       title: "Hulo",
-      description: "vuepress-theme-hope 的文档演示",
+      description: "✨ Hulo 编程语言的官方文档网站。",
     },
   },
 

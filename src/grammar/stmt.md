@@ -8,57 +8,59 @@ tag:
 license: MIT
 ---
 
-## 注释
+> `Statements` are the basic syntax units in the Hulo language used for **executing operations**, including variable declarations, type definitions, scope control, comments, etc. Statements do not produce values, but rather execute specific actions, such as defining variables, declaring types, controlling program flow, etc. Statements are the foundation for building program structures, and by combining different statement types, complete program logic and functional modules can be constructed.
+
+## Comment
 
 ::: tip 
-在 Hulo 中，注释在编译后会被保留，并转换为目标语言对应的注释格式。这对于保留文档信息、调试辅助或生成带注释的目标代码尤为有用。若你希望生成的代码更简洁，也可以通过设置 `disableComment = true` 来禁用注释输出。
+In Hulo, comments are preserved after compilation and converted to the corresponding comment format of the target language. This is particularly useful for preserving documentation information, debugging assistance, or generating target code with comments. If you want the generated code to be more concise, you can also disable comment output by setting `disableComment = true`.
 :::
 
-### 单行注释
+### Line Comment
 
-单行注释使用 `//` 开头，适合添加简短说明：
+Single-line comments start with `//` and are suitable for adding brief explanations:
 ```hulo
-let x = 42  // 定义一个整数变量 x
+let x = 42  // Define an integer variable x
 ```
 
-### 多行注释
+### Block Comment
 
-多行注释使用 `/** ... */` 包裹，可以书写更复杂、格式化的注解说明。适用于函数说明、配置说明、模块文档等场景：
+Multi-line comments are wrapped with `/** ... */` and can contain more complex, formatted annotation descriptions. Suitable for function descriptions, configuration explanations, module documentation, etc.:
 
 ```hulo
 /**
- * 初始化程序
- * 这里进行环境配置和启动流程
+ * Initialize program
+ * Here we configure the environment and startup process
  */
 fn init() {
-    // TODO: 实现细节
+    // TODO: Implementation details
 }
 ```
 
-### 构建指令注释
+### Build Directive Comments
 
-Hulo 支持通过特殊格式的注释来传递构建指令，例如目标平台、编译选项等。这类注释以 `// @hulo-build` 开头，紧随其后的关键字和参数将被编译器解析，而非作为普通注释处理。
+Hulo supports passing build directives through specially formatted comments, such as target platform, compilation options, etc. These comments start with `// @hulo-build`, and the keywords and parameters that follow will be parsed by the compiler rather than treated as ordinary comments.
 ```hulo
 // @hulo-build bash
 ```
 
-上述语句指示 Hulo 编译器在当前文件中使用 Bash 为目标平台进行构建。这在需要跨平台支持时非常有用，允许你为不同平台编写差异化的逻辑或配置，而不影响主代码的结构。
+The above statement instructs the Hulo compiler to use Bash as the target platform for building in the current file. This is very useful when cross-platform support is needed, allowing you to write differentiated logic or configuration for different platforms without affecting the structure of the main code.
 
-在很多情况下，单纯指定目标平台并不足以满足更细粒度的控制需求。因此，Hulo 还支持在构建指令中附加参数，以实现更灵活的构建行为：
+In many cases, simply specifying the target platform is not sufficient to meet more granular control requirements. Therefore, Hulo also supports attaching parameters to build directives to achieve more flexible build behavior:
 ```hulo
 // @hulo-build bash@4.0 --path /bin/bash
 ```
 
-在上面的例子中，`bash@4.0` 指定了目标平台及其版本，而 `--path /bin/bash` 则作为构建参数传递给后端工具，用于调整生成逻辑或路径配置。这种方式可用于平台差异适配、多版本支持、插件切换等高级用法。
+In the example above, `bash@4.0` specifies the target platform and its version, while `--path /bin/bash` is passed as a build parameter to the backend tool for adjusting generation logic or path configuration. This approach can be used for platform difference adaptation, multi-version support, plugin switching, and other advanced usage scenarios.
 
 
-## 作用域
+## Scope
 
 ### let
 
-* 作用域范围：仅在声明所在的 `{}` 块内有效
-* 重新赋值：允许
-* 重复声明：禁止（同作用域内）
+* Scope range: Only valid within the `{}` block where it is declared
+* Reassignment: Allowed
+* Redeclaration: Forbidden (within the same scope)
 ```hulo
 {
   let a = 10
@@ -71,9 +73,9 @@ echo $a // null
 
 ### var
 
-* 作用域范围：跨所有代码块，直到文件/函数结束
-* 重新赋值：允许
-* 重复声明：允许（会覆盖前值）
+* Scope range: Spans all code blocks until the end of the file/function
+* Reassignment: Allowed
+* Redeclaration: Allowed (will override the previous value)
 ```hulo
 {
   var a = 10
@@ -86,14 +88,14 @@ echo $a // 20
 
 ### const
 
-* 作用域范围：同 `let`，仅在声明块内有效
-* 重新赋值：禁止
-* 重复声明：禁止
+* Scope range: Same as `let`, only valid within the declaration block
+* Reassignment: Forbidden
+* Redeclaration: Forbidden
 ```hulo
 {
   const a = 10
   echo $a // 10
-  $a = 20 // 错误
+  $a = 20 // Error
 }
 
 echo $a // null
@@ -102,10 +104,10 @@ echo $a // null
 ## type
 
 ::: tip
-在 Hulo 中的类型系统类似于 `Typescript`，引入这套系统主要是为了实现对命令的抽象。除了 `type` 关键字外，`use` 关键字也支持相应的类型系统。关于 `use` 的详解，我们会在命令章节娓娓道来。
+The type system in Hulo is similar to `Typescript`. This system is primarily introduced to achieve abstraction of commands. In addition to the `type` keyword, the `use` keyword also supports the corresponding type system. We will elaborate on `use` in the command chapter.
 :::
 
-### 类型别名
+### Type Alias
 ```hulo
 type int = num
 type float = num
@@ -114,7 +116,7 @@ let i: int = 1
 const PI: float = 3.14
 ```
 
-### 联合类型
+### Union Types
 ```hulo
 type A = num | str | bool
 type B = num & str
@@ -125,21 +127,21 @@ type User = { name: str, age: num }
 
 type Function<T, R> = (arg: T) => R;
 
-// 继承接口
+// Inherit interface
 type Releaser = { Package.install, Package.init  }
 ```
 
-### 复合类型基础
+### Basic Composite Types
 
 **never**
-`never` 是类型系统中的一个特殊类型，表示**永远不可达的值或永不返回的操作**。
+`never` is a special type in the type system that represents **values that are never reachable or operations that never return**.
 
-* 在类型运算中排除某些情况
+* Exclude certain cases in type operations
 ```hulo
 type NonNull<T> = T extends null ? never : T
 ```
 
-* 表示不可能的分支
+* Represent impossible branches
 ```hulo
 type Shape = Circle | Square
 fn getArea(s: Shape): num {
@@ -148,25 +150,25 @@ fn getArea(s: Shape): num {
     } else if (s is Square) {
         return s.size * s.size
     } else {
-        // 这里s的类型是never
-        // 表示所有可能情况都已处理
+        // Here s is of type never
+        // Indicates all possible cases have been handled
     }
 }
 ```
 
 **[key in T]**
 
-遍历 `T` 本身（需 `T` 是联合类型），生成键名来自 `T` 成员的新类型。
+Iterate over `T` itself (requires `T` to be a union type), generating a new type with keys from `T` members.
 
 ```hulo
 type Protocal = 'udp' | 'tcp'
 ```
-对于 `Protocal` 的遍历将依次得到 `udp`、`tcp` 的键名：
+For iteration over `Protocal`, we will get the keys `udp`, `tcp` in sequence:
 ```hulo
 type ProtocalNo = {
   [K in Protocal]: num
 }
-/* 结果：
+/* Result:
 type ProtocalNo {
   udp: num
   tcp: num
@@ -176,7 +178,7 @@ type ProtocalNo {
 
 **[key in keyof T]**
 
-遍历类型 `T` 的所有**属性名（键）**，生成新的映射类型。
+Iterate over all **property names (keys)** of type `T`, generating a new mapped type.
 
 ```hulo
 class User {
@@ -184,12 +186,12 @@ class User {
   age: num
 }
 ```
-对于 `User` 类型，遍历的所有属性名为 `name`、 `age`
+For the `User` type, all property names iterated are `name`, `age`
 ```hulo
 type UserClone<T extends User> = {
   [K in keyof T]: T[K]
 }
-/* 结果：
+/* Result:
 type UserClone {
   name: str
   age: num
@@ -199,7 +201,7 @@ type UserClone {
 
 **T[K]**
 
-通过键名 `K` 获取类型 `T` 中对应属性的类型。
+Get the type of the corresponding property in type `T` through key name `K`.
 
 ```hulo
 type User = {
@@ -212,29 +214,29 @@ type NameType = User["name"]  // str
 type AgeType = User["age"]   // num
 ```
 ::: tip
-* `K` 必须是 `T` 的已知键名（或联合键名）
-* 支持嵌套访问（如 `T["a"]["b"]`）
+* `K` must be a known key name (or union key name) of `T`
+* Supports nested access (such as `T["a"]["b"]`)
 :::
 
 **extends**
 
-用于对类型进行条件限制或继承。
+Used for conditional constraints or inheritance of types.
 
-* 泛型约束
+* Generic constraints
 ```hulo
-// 确保 T 必须包含 id 属性
+// Ensure T must contain id property
 type WithId<T extends { id: str }> = T
 
-// 合法
+// Valid
 type Valid = WithId<{ id: "123", name: str }>
 
-// 非法（缺少 id）
+// Invalid (missing id)
 type Invalid = WithId<{ name: str }>
 ```
 
-* 条件判断
+* Conditional judgment
 ```hulo
-// 若 T 是 num 则返回 str，否则返回 bool
+// If T is num then return str, otherwise return bool
 type TypeCheck<T> = T extends num ? str : bool
 
 type A = TypeCheck<10>     // str
@@ -242,17 +244,17 @@ type B = TypeCheck<"hello"> // bool
 ```
 
 ::: tip
-在 Hulo 中 `extends` 关键字还用于类的继承
+In Hulo, the `extends` keyword is also used for class inheritance
 :::
 
 ### ValueOf
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type ValueOf<T> = T[keyof T]
 ```
 
-**示例：**
+**Example:**
 ```hulo
 class Foo {
   a: num
@@ -264,9 +266,9 @@ type FooValues = ValueOf<Foo> // num | str
 
 ### Readonly
 
-将 `T` 的所有属性变为只读。
+Make all properties of `T` read-only.
 
-**类型签名：**
+**Type signature:**
 
 ```hulo
 type Readonly<T> = {
@@ -274,7 +276,7 @@ type Readonly<T> = {
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 class Config {
   timeout: num
@@ -284,16 +286,16 @@ type ImmutableConfig = Readonly<Config>  // { readonly timeout: num }
 
 ### Partial
 
-`Partial<T>` 是一个**实用工具类型**，用于将类型 `T` 的所有属性变为**可选属性**。它特别适用于需要处理对象部分更新的场景。
+`Partial<T>` is a **utility type** used to make all properties of type `T` **optional properties**. It is particularly suitable for scenarios that need to handle partial updates of objects.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Partial<T> = {
-  [P in keyof T]?: T[p] // 将 T 的每个属性 P 标记为可选
+  [P in keyof T]?: T[p] // Mark each property P of T as optional
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 class User {
   name: str
@@ -305,16 +307,16 @@ type PartialUser = Partial<User> // { name?: str, age?: num }
 
 ### Pick
 
-从类型 `T` 中选取一组属性 `K` 组成新类型。
+Select a set of properties `K` from type `T` to form a new type.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Pick<T, K extends keyof T> = {
   [P in K]: T[P]
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 class User {
   id: str
@@ -324,7 +326,7 @@ class User {
 }
 
 type UserBasicInfo = Pick<User, "id" | "name">
-/* 结果：
+/* Result:
 type UserBasicInfo = {
   id: str
   name: str
@@ -334,14 +336,14 @@ type UserBasicInfo = {
 
 ### Exclude
 
-从类型 `T` 中排除可赋值给 `U` 的类型。
+Exclude types assignable to `U` from type `T`.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Exclude<T, U> = T extends U ? never : T
 ```
 
-**示例：**
+**Example:**
 ```hulo
 type Allowed = num | str | bool
 type NoStrings = Exclude<Allowed, str>  // num | bool
@@ -349,18 +351,18 @@ type NoStrings = Exclude<Allowed, str>  // num | bool
 
 ### Omit
 
-从类型 `T` 中排除一组属性 `K` 组成新类型。
+Exclude a set of properties `K` from type `T` to form a new type.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 ```
 
-**示例：**
+**Example:**
 ```hulo
-// 排除敏感字段
+// Exclude sensitive fields
 type SafeUser = Omit<User, "email" | "id">
-/* 结果：
+/* Result:
 type SafeUser = {
   name: str
   age: num
@@ -370,14 +372,14 @@ type SafeUser = {
 
 ### If
 
-在类型系统中实现条件逻辑，类似于三元表达式，但作用于类型层面。
+Implement conditional logic in the type system, similar to ternary expressions but operating at the type level.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type If<Condition, Then, Else> = Condition extends true ? Then : Else
 ```
 
-**示例：**
+**Example:**
 ```hulo
 type IsNumber<T> = T extends num ? true : false
 type Result = If<IsNumber<str>, "Yes", "No">  // "No"
@@ -403,9 +405,9 @@ type D = TypeChecker<null>; // "null"
 
 ### Merge
 
-合并两个类型 `T` 和 `U` 的属性，`U` 的同名属性会覆盖 `T`。
+Merge properties of two types `T` and `U`, where properties with the same name in `U` will override those in `T`.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Merge<T, U> = {
   [K in keyof T | keyof U]:
@@ -415,16 +417,16 @@ type Merge<T, U> = {
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 type A = { name: str; age: num }
 type B = { age: str; email: str }
 
 type C = Merge<A, B>
-/* 结果：
+/* Result:
 {
   name: str
-  age: str  // 被 B 覆盖
+  age: str  // Overridden by B
   email: str
 }
 */
@@ -432,40 +434,40 @@ type C = Merge<A, B>
 
 ### Diff
 
-找出 `T` 中存在但 `U` 中不存在的属性。
+Find properties that exist in `T` but not in `U`.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Diff<T, U> = {
   [K in Exclude<keyof T, keyof U>]: T[K]
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 type User = { id: str; name: str; age: num }
 type UpdatedUser = { id: str; name: str }
 
 type ChangedFields = Diff<User, UpdatedUser>
-/* 结果：
+/* Result:
 {
-  age: num  // 只有 User 有
+  age: num  // Only User has this
 }
 */
 ```
 
 ### Mutable
 
-将类型 `T` 的所有 `readonly` 属性变为可变属性，移除所有属性的只读修饰符。
+Make all `readonly` properties of type `T` mutable by removing the read-only modifier from all properties.
 
-**类型签名：**
+**Type signature:**
 ```hulo
 type Mutable<T> = {
   -readonly [P in keyof T]: T[P]
 }
 ```
 
-**示例：**
+**Example:**
 ```hulo
 class ImmutableConfig {
   readonly timeout: num
@@ -473,7 +475,7 @@ class ImmutableConfig {
 }
 
 type EditableConfig = Mutable<ImmutableConfig>
-/* 结果：
+/* Result:
 {
   timeout: num
   retries: num
@@ -490,9 +492,9 @@ type EditableConfig = Mutable<ImmutableConfig>
 
 ## use
 
-在 Hulo 语言中，`use` 是用于命令组合的核心语法结构，与 `type` 形成对称设计。
+In the Hulo language, `use` is the core syntactic structure for command composition, forming a symmetrical design with `type`.
 
-在开始前假设我们有这样一个命令特征：
+Before we begin, let's assume we have a command trait like this:
 ```hulo
 @command
 trait Placeholder {
@@ -507,25 +509,25 @@ trait Placeholder {
 }
 ```
 
-以及以下实现该特征的命令:
+And the following commands that implement this trait:
 ```hulo
 impl Placeholder for Foo, Bar, Baz;
 ```
 
-### 基础用法
+### Basic Usage
 
-在默认情况下 Hulo 会选择首次匹配的实现类作为默认命令。
+By default, Hulo will select the first matching implementation class as the default command.
 ```hulo
 Placeholder -a 10 -b "abc" // Foo -a 10 -b "abc"
 ```
 
-指定命令
+Specify command
 ```hulo
 use Placeholder = Bar;
 Placeholder -a 10 -b "abc" // Bar -a 10 -b "abc"
 ```
 
-### 命令组合
+### Command Composition
 ```hulo
 use Placeholder = Exclude<Bar, Placeholder()> & Baz
 
@@ -533,21 +535,21 @@ Placeholder // Baz
 Placeholder -a 10 -b "abc" // Bar -a 10 -b "abc"
 ```
 
-### 模式匹配
+### Pattern Matching
 ```hulo
 use Placeholder = Bar(_) & Baz
 ```
 
-匹配规则：
-没有扩展包裹代表全部匹配
-参数匹配需要以 ( ) 包裹匹配规则
+Matching rules:
+No extension wrapper represents full matching
+Parameter matching needs to be wrapped with ( ) for matching rules
 
-(_) 代表匹配待参数的所有可能
-(_, _) 代表匹配带两个参数的所有可能
-(a, b) 代表匹配入参名字为 a 和 b 的所有可能
-(_, b) 代表匹配首参数任意，第二个参数为 b
-(_, b | c) 代表匹配首参数任意，第二个参数为 b 或 c 组合
-(_, ~b) 代表匹配首参数任意，第二个参数除去 b
-(_, ~b & c) 代表首参数任意，第二个参数除去 b 但是要包含 c
+(_) represents matching all possibilities with parameters
+(_, _) represents matching all possibilities with two parameters
+(a, b) represents matching all possibilities with parameter names a and b
+(_, b) represents matching first parameter arbitrary, second parameter as b
+(_, b | c) represents matching first parameter arbitrary, second parameter as b or c combination
+(_, ~b) represents matching first parameter arbitrary, second parameter excluding b
+(_, ~b & c) represents first parameter arbitrary, second parameter excluding b but must include c
 
 ## extension

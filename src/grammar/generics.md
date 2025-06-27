@@ -8,140 +8,742 @@ tag:
 license: MIT
 ---
 
-> 泛型（Generics）是一种在编程语言中用于实现类型参数化的机制，允许开发者在编写程序组件时不预先指定具体的数据类型，而是在实际使用时再指定类型。它是一种抽象化的能力，使得函数、类型、接口、结构体或类在定义时可以引入一个或多个类型参数。这些类型参数在组件内部表现为实际类型的占位符，直到该组件被实例化或调用时才被替换为具体类型。
+> `Generics` is a mechanism in programming languages used to implement **type parameterization**, allowing developers to write program components without pre-specifying concrete data types, but rather specifying types when actually using them. It is an abstraction capability that enables functions, types, interfaces, structs, or classes to introduce one or more type parameters when defined. These type parameters act as placeholders for actual types within the component, and are only replaced with concrete types when the component is instantiated or called.
 
-在 Hulo 中的类/函数/接口可以有类型参数，例如：
+In Hulo, classes/functions/interfaces can have type parameters, for example:
 ```hulo :no-line-numbers
 class Box<T> {
     value: T
 
-    Box(this.value)
+    Box($this.value)
 }
 
 let box: Box<num> = Box<num>(3.14)
 ```
-但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，就可以省略类型参数：
+However, if type parameters can be inferred, for example from constructor parameters or other means, the type parameters can be omitted:
 ```hulo :no-line-numbers
 let box = Box(3.14)
 ```
 
-## 泛型函数
+## Generic Functions
+
+Generic functions allow you to write functions that can handle multiple data types without writing duplicate code for each type. Type parameters are automatically inferred from the arguments passed during function calls, or can be explicitly specified.
+
+### Basic Generic Functions
 
 ```hulo
+// Simple generic function
+fn identity<T>(value: T) -> T {
+    return $value
+}
+
+// Using automatic type inference
+let num = identity(42)        // Inferred as num
+let str = identity("hello")   // Inferred as str
+let bool = identity(true)     // Inferred as bool
+
+// Explicitly specifying type parameters
+let explicit = identity<num>(42)
+```
+
+### Multi-Parameter Generic Functions
+
+```hulo
+// Two parameters of the same type
 fn add<T>(a: T, b: T) -> T {
-    return a + b
+    return $a + $b
 }
 
-add(1, 2)
-add("Hello", "World")
-
-import "./user.hulo"
-
-let u1 = new user(name: "u1")
-let u2 = new user(name: "u2")
-
-extend class user {
-    fn operator +(right: user) -> user {
-        return user{name: this.name() + right.name(), age: this.age() + right.age()};
-    }
+// Two parameters of different types
+fn pair<T, U>(first: T, second: U) -> [T, U] {
+    return [$first, $second]
 }
 
-let u3 = add(u1, u2)
-
-echo $u3
+// Usage examples
+let sum = add(10, 20)                    // Automatically inferred as num
+let concat = add("Hello", "World")       // Automatically inferred as str
+let tuple = pair("age", 25)              // Inferred as [str, num]
 ```
 
-## 泛型类
+### Generic Functions with Operator Overloading
+
 ```hulo
-class pair<T, U> {
-    x: T
-    y: U
-
-    pair({required this.x, required this.y})
-
-    fn one(): T => x;
-
-    fn two(): U => y;
+// Define generic function supporting addition
+fn sum<T>(a: T, b: T) -> T {
+    return $a + $b
 }
 
-fn main() {
-    let a = pair<str, bool>("abc", true)
-
-    println(a.one())
-    println(a.two())
+// Add operator overloading for custom types
+class Vector {
+    x: num
+    y: num
+    
+    Vector($this.x, $this.y)
+    
+    operator +(other: Vector) -> Vector {
+        return Vector($this.x + $other.x, $this.y + $other.y)
+    }
 }
+
+// Now can be used with custom types
+let v1 = Vector(1, 2)
+let v2 = Vector(3, 4)
+let v3 = sum($v1, $v2)  // Automatically uses Vector's + operator
 ```
 
-## 泛型接口
+::: tip
+* Type parameters `<T>` are declared after the function name in generic functions
+* Type parameters can be used in parameter lists, return types, and function bodies
+* The compiler automatically infers type parameters based on passed arguments
+* Type parameters can also be explicitly specified: `identity<num>(42)`
+* Multiple type parameters are supported: `fn process<T, U, V>(...)`
+:::
+
+## Generic Classes
+
+Generic classes allow you to create classes that can handle multiple data types. The class is instantiated with specific type parameters, making all properties and methods within the class use this type.
+
+### Basic Generic Classes
+
 ```hulo
-trait comparable<T> {
-    is_same: (T) -> bool
-}
-
-trait clone<T> {
-    fork: () -> T
-}
-
-fn f<T: clone & comparable>(x: T, y: T): T {
-    if $x.is_same(y) {
-        return $x.fork()
+// Simple generic container class
+class Box<T> {
+    value: T
+    
+    Box($this.value)
+    
+    fn getValue(): T => $this.value
+    
+    fn setValue(value: T) {
+        $this.value = $value
     }
-    return $y.fork()
 }
 
-type myT = clone & comparable;
+// Usage examples
+let numBox = Box<num>(42)
+let strBox = Box<str>("Hello")
+let boolBox = Box<bool>(true)
 
-fn f<T: myT>(x: T, y: T): T {
-    if $x.is_same(y) {
-        return $x.fork()
+echo $numBox.getValue()   // 42
+echo $strBox.getValue()   // "Hello"
+```
+
+### Multi-Type Parameter Classes
+
+```hulo
+// Key-value pair class
+class Pair<K, V> {
+    key: K
+    value: V
+    
+    Pair($this.key, $this.value)
+    
+    fn getKey(): K => $this.key
+    
+    fn getValue(): V => $this.value
+    
+    fn setValue(value: V) {
+        $this.value = $value
     }
-    return $y.fork()
+}
+
+// Usage examples
+let userPair = Pair<str, num>("age", 25)
+let configPair = Pair<str, bool>("enabled", true)
+
+echo $userPair.getKey()     // "age"
+echo $userPair.getValue()   // 25
+```
+
+### Generic Classes with Constraints
+
+```hulo
+// Generic class with constraints
+class SortedList<T extends Comparable<T>> {
+    items: T[] = []
+    
+    fn add(item: T) {
+        $this.items.push($item)
+        $this.items.sort()
+    }
+    
+    fn get(index: num): T => $this.items[index]
+    
+    fn size(): num => $this.items.length()
+}
+
+// Usage example (num implements Comparable)
+let numbers = SortedList<num>()
+$numbers.add(3)
+$numbers.add(1)
+$numbers.add(2)
+
+echo $numbers.get(0)  // 1 (sorted)
+```
+
+::: tip
+* Type parameters in generic classes are declared after the class name: `class Box<T>`
+* Type parameters can be used in class properties, method parameters, and return types
+* Type parameters can be explicitly specified during instantiation: `Box<num>(42)`
+* If constructor parameters can infer the type, type parameters can be omitted: `Box(42)`
+* Constraints can be used in class definitions: `class Container<T extends SomeTrait>`
+:::
+
+### Generic Class Inheritance
+
+```hulo
+// Base generic container
+class Container<T> {
+    value: T
+    
+    Container($this.value)
+    
+    fn get(): T => $this.value
+}
+
+// Generic class inheriting from generic class
+class Box<T> extends Container<T> {
+    Box(value: T) {
+        super($value)
+    }
+    
+    fn set(value: T) {
+        $this.value = $value
+    }
+}
+
+// Non-generic class inheriting from generic class (specifying concrete type)
+class StringContainer extends Container<str> {
+    StringContainer(value: str) {
+        super($value)
+    }
+    
+    fn toUpper(): str => $this.value.toUpper()
+}
+
+// Usage examples
+let box = Box<num>(42)
+let stringContainer = StringContainer("hello")
+```
+
+## Generic Interfaces
+
+Generic interfaces (traits) allow you to define interfaces that can handle multiple data types. Classes implementing generic interfaces must provide concrete type parameters, or implement the generic version of the interface.
+
+### Basic Generic Interfaces
+
+```hulo
+// Comparable interface
+trait Comparable<T> {
+    compare: (T) -> num  // Returns -1, 0, 1
+}
+
+// Cloneable interface
+trait Cloneable<T> {
+    clone: () -> T
+}
+
+// Serializable interface
+trait Serializable<T> {
+    serialize: () -> str
+    deserialize: (str) -> T
 }
 ```
 
-## 泛型约束
+### Implementing Generic Interfaces
 
-> **泛型约束**是指在使用泛型时对类型参数施加的限制，用于指定类型参数必须满足的条件。它确保在编译期，传入的类型具备某些特性，如实现某个接口、继承某个类、具有特定操作或成员等。通过设置约束，开发者可以在泛型代码中安全地使用依赖于这些特性的语法和操作，而无需显式转换或额外检查。
+```hulo
+// Implement interface for concrete types
+class User {
+    name: str
+    age: num
+    
+    User($this.name, $this.age)
+    
+    // Implement Comparable<User>
+    fn compare(other: User) -> num {
+        if $this.age < $other.age return -1
+        if $this.age > $other.age return 1
+        return 0
+    }
+    
+    // Implement Cloneable<User>
+    fn clone() -> User {
+        return User($this.name, $this.age)
+    }
+    
+    // Implement Serializable<User>
+    fn serialize() -> str {
+        return "{\"name\":\"${$this.name}\",\"age\":${$this.age}}"
+    }
+    
+    fn deserialize(data: str) -> User {
+        // Parse JSON and create User object
+        // Simplified here
+        return User("parsed", 0)
+    }
+}
 
-### 接口约束
+// Explicit interface implementation
+impl Comparable<User> for User {
+    fn compare(other: User) -> num {
+        if $this.age < $other.age return -1
+        if $this.age > $other.age return 1
+        return 0
+    }
+}
 
-最常见的约束类型就是采用泛型接口，要求实现这个接口的类型参数才能被应用到该类型上。
+impl Cloneable<User> for User {
+    fn clone() -> User {
+        return User($this.name, $this.age)
+    }
+}
+
+impl Serializable<User> for User {
+    fn serialize() -> str {
+        return "{\"name\":\"${$this.name}\",\"age\":${$this.age}}"
+    }
+    
+    fn deserialize(data: str) -> User {
+        return User("parsed", 0)
+    }
+}
+```
+
+### Generic Interface Composition
+
+```hulo
+// Compose multiple interfaces
+type Sortable<T> = Comparable<T> & Cloneable<T>
+
+// Function using composed interface
+fn sort<T: Sortable<T>>(items: T[]) -> T[] {
+    // Sorting logic
+    return $items.sort()
+}
+
+// Usage example
+let users: User[] = [
+    User("Alice", 25),
+    User("Bob", 30),
+    User("Charlie", 20)
+]
+
+let sortedUsers = sort($users)
+```
+
+### Advanced Usage of Generic Interfaces
+
+```hulo
+// Factory interface
+trait Factory<T> {
+    create: () -> T
+}
+
+// Builder interface
+trait Builder<T> {
+    build: () -> T
+    reset: () -> void
+}
+
+// Observer interface
+trait Observer<T> {
+    update: (T) -> void
+}
+
+// Observable interface
+trait Observable<T> {
+    addObserver: (Observer<T>) -> void
+    removeObserver: (Observer<T>) -> void
+    notify: (T) -> void
+}
+
+// Implementation examples
+impl Factory<User> for UserFactory {
+    fn create() -> User {
+        return User("default", 0)
+    }
+}
+
+class UserFactory {}
+
+impl Builder<User> for UserBuilder {
+    fn build() -> User {
+        return User($this.name, $this.age)
+    }
+    
+    fn reset() {
+        $this.name = ""
+        $this.age = 0
+    }
+}
+
+class UserBuilder {
+    name: str = ""
+    age: num = 0
+    
+    fn setName(name: str) {
+        $this.name = $name
+    }
+    
+    fn setAge(age: num) {
+        $this.age = $age
+    }
+}
+```
+
+### Default Implementations in Generic Interfaces
+
+```hulo
+// Generic interface with default implementations
+trait Printable<T> {
+    fn print() {
+        echo "default print"
+    }
+    
+    fn format() -> str {
+        return "default format"
+    }
+}
+
+// Using default implementation
+impl Printable<User> for User {}
+
+// Override default implementation
+impl Printable<User> for User {
+    fn print() {
+        echo "User: ${$this.name}, Age: ${$this.age}"
+    }
+    
+    fn format() -> str {
+        return "User(${$this.name}, ${$this.age})"
+    }
+}
+```
+
+### Generic Interface Inheritance
+
+```hulo
+// Base interfaces
+trait Readable<T> {
+    read: () -> T
+}
+
+trait Writable<T> {
+    write: (T) -> void
+}
+
+// Inherited interface
+trait ReadWrite<T>: Readable<T>, Writable<T> {
+    // Can add new methods
+    fn clear() {
+        // Default implementation
+    }
+}
+
+// Implement inherited interface
+impl ReadWrite<str> for FileHandler {
+    fn read() -> str {
+        return "file content"
+    }
+    
+    fn write(data: str) {
+        echo "writing: $data"
+    }
+    
+    fn clear() {
+        echo "clearing file"
+    }
+}
+
+class FileHandler {}
+```
+
+::: tip
+* Type parameters in generic interfaces are declared after the interface name: `trait Comparable<T>`
+* Interface method signatures can use type parameters
+* When implementing interfaces, concrete types can be specified or kept generic
+* Type aliases can be used to simplify complex interface compositions: `type Sortable<T> = Comparable<T> & Cloneable<T>`
+* Interface composition and inheritance are supported, providing powerful abstraction capabilities
+:::
+
+## Generic Constraints
+
+> **Generic constraints** refer to restrictions imposed on type parameters when using generics, used to specify conditions that type parameters must satisfy. They ensure that at compile time, the passed types have certain characteristics, such as implementing an interface, inheriting from a class, having specific operations or members, etc. By setting constraints, developers can safely use syntax and operations that depend on these characteristics in generic code without explicit conversion or additional checks.
+
+### Basic Constraint Syntax
+
+Hulo supports multiple constraint syntaxes, including the `extends` keyword and colon syntax:
+
+#### extends Syntax (Recommended)
+```hulo
+// Single constraint
+fn process<T extends Addable>(item: T) -> T {
+    return $item + $item
+}
+
+// Multiple constraints (intersection)
+fn process<T extends Addable + Comparable>(item: T) -> T {
+    if $item > 0 {
+        return $item + $item
+    }
+    return $item
+}
+
+// Union constraints
+fn process<T extends str | num>(item: T) -> T {
+    return $item
+}
+```
+
+#### Colon Syntax
+```hulo
+// Single constraint
+fn process<T: Addable>(item: T) -> T {
+    return $item + $item
+}
+
+// Multiple constraints (intersection)
+fn process<T: Addable & Comparable>(item: T) -> T {
+    if $item > 0 {
+        return $item + $item
+    }
+    return $item
+}
+
+// Union constraints
+fn process<T: str | num>(item: T) -> T {
+    return $item
+}
+```
+
+### Interface Constraints
+
+The most common constraint type is using generic interfaces, requiring type parameters that implement this interface to be applied to the type.
 ```hulo :no-line-numbers
-fn add<T: Additive<T>>(a: T, b: T) {
+fn add<T extends Additive<T>>(a: T, b: T) {
     return $a + $b
 }
 ```
 
-如上声明可知，add 函数要求两个入参必须是可加类型：
+As shown in the above declaration, the add function requires that both input parameters must be additive types:
 ```hulo :no-line-numbers
-add(1, 2) // OK，num 是一个可加类型
-add(true, false) // 错误，bool 类型不可相加
+add(1, 2) // OK, num is an additive type
+add(true, false) // Error, bool type cannot be added
 ```
 
-### 复合约束
-同类型系统所述的复合类型类型类似，泛型约束也遵循相同的规则。
+### Composite Constraints
+
+Similar to composite types in the type system, generic constraints also follow the same rules.
 ```hulo :no-line-numbers
-fn add<T: str | num>(a: T, b: T) => $a + $b
+fn add<T extends str | num>(a: T, b: T) => $a + $b
 ```
 
-你甚至可以将复合类型的规则作用到 泛型的接口约束 上，例如：
+You can even apply composite type rules to generic interface constraints, for example:
 ```hulo :no-line-numbers
-fn add<T: Additive<T> & Comparable<T>>(a: T, b: T) => $a + $b
+fn add<T extends Additive<T> + Comparable<T>>(a: T, b: T) => $a + $b
 ```
 
-## 泛型特化
+### Type Gymnastics Constraints
 
-在上述例子中，我们使用泛型约束实现了 add 函数，但是它对于 bool 类型或者其他自定义类型并不支持。为了解决这个问题，我们可以像类似函数重载的方式一样，单独为想要处理的类型实现约束的扩展。
+Hulo supports complex type gymnastics constraints, allowing type calculations and conditional judgments at compile time:
+
+#### Conditional Constraints
+```hulo
+// Conditional type constraints
+fn process<T extends (T extends str ? HasLength : HasValue)>(item: T) {
+    if $item is str {
+        echo $item.length()
+    } else {
+        echo $item.value()
+    }
+}
+
+// Nested conditional constraints
+fn safeAccess<T extends (T extends null ? never : T)>(item: T) -> T {
+    return $item
+}
+```
+
+#### Mapping Constraints
+```hulo
+// Mapping type constraints
+fn processObject<T extends { [K in keyof T]: T[K] extends str ? T[K] : never }>(obj: T) {
+    loop ($key, $value) of $obj {
+        echo "$key: $value"
+    }
+}
+
+// Readonly constraints
+fn processReadonly<T extends { readonly [P in keyof T]: T[P] }>(obj: T) {
+    // Process readonly objects
+}
+```
+
+#### Recursive Constraints
+```hulo
+// Recursive type constraints
+fn deepClone<T extends (T extends object ? { [K in keyof T]: T[K] } : T)>(item: T) -> T {
+    if $item is object {
+        // Deep clone logic
+        return clone($item)
+    }
+    return $item
+}
+```
+
+## Generic Specialization
+
+In the above examples, we implemented the add function using generic constraints, but it doesn't support bool types or other custom types. To solve this problem, we can implement constraint extensions for specific types we want to handle, similar to function overloading.
 
 ```hulo :no-line-numbers
 fn add(a: bool, b: bool) => $a & $b
 ```
-在声明了这个函数重载后，对 `add(true, false)` 的调用便不会抛出异常。当然，你也可以在声明前加入类型参数，更加规范的告诉其他开发者，这是一个泛型的特化而非简单的函数重载。
+After declaring this function overload, calls to `add(true, false)` won't throw exceptions. Of course, you can also add type parameters before the declaration to more formally tell other developers that this is a generic specialization rather than a simple function overload.
 
 ::: tip
-不管哪两种书写方式，对于编译器来说并无本质区别。
+Regardless of which two writing methods, there's no essential difference for the compiler.
 :::
 
 ```hulo :no-line-numbers
-fn add<T: bool>(a: T, b: T) => $a & $b
+fn add<T extends bool>(a: T, b: T) => $a & $b
+```
+
+### Advanced Specialization Patterns
+
+#### Conditional Specialization
+```hulo
+// Specialize based on type conditions
+fn process<T extends (T extends str ? HasLength : HasValue)>(item: T) {
+    if $item is str {
+        echo "String length: ${$item.length()}"
+    } else {
+        echo "Value: ${$item.value()}"
+    }
+}
+
+// Specialized versions
+fn process<T extends str>(item: T) {
+    echo "String: $item"
+}
+
+fn process<T extends num>(item: T) {
+    echo "Number: $item"
+}
+```
+
+#### Constraint Combination Specialization
+```hulo
+// Base constraints
+fn merge<T extends Addable + Comparable>(a: T, b: T) -> T {
+    return $a > $b ? $a : $b
+}
+
+// Specialized version: string concatenation
+fn merge<T extends str>(a: T, b: T) -> T {
+    return $a + " " + $b
+}
+
+// Specialized version: array concatenation
+fn merge<T extends list<any>>(a: T, b: T) -> T {
+    return [...$a, ...$b]
+}
+```
+
+## Generic Utility Types
+
+Hulo provides a series of built-in generic utility types for type operations and transformations:
+
+### Basic Utility Types
+```hulo
+// Optional type
+type Optional<T> = T | null
+
+// Readonly type
+type Readonly<T> = { readonly [P in keyof T]: T[P] }
+
+// Partial type
+type Partial<T> = { [P in keyof T]?: T[P] }
+
+// Required type
+type Required<T> = { [P in keyof T]-?: T[P] }
+
+// Pick type
+type Pick<T, K extends keyof T> = { [P in K]: T[P] }
+
+// Omit type
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+```
+
+### Advanced Utility Types
+```hulo
+// Conditional type
+type If<C extends bool, T, F> = C extends true ? T : F
+
+// Non-nullable type
+type NonNullable<T> = T extends null | undefined ? never : T
+
+// Function parameter type
+type Parameters<T extends (...args: any[]) => any> = T extends (...args: infer P) => any ? P : never
+
+// Function return type
+type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : never
+
+// Constructor parameter type
+type ConstructorParameters<T extends new (...args: any[]) => any> = T extends new (...args: infer P) => any ? P : never
+
+// Instance type
+type InstanceType<T extends new (...args: any[]) => any> = T extends new (...args: any[]) => infer R ? R : never
+```
+
+## Generic Best Practices
+
+### Constraint Design Principles
+```hulo
+// ✅ Good constraints: clear and minimal
+fn sort<T extends Comparable<T>>(items: T[]) -> T[] {
+    // Only needs comparison capability
+}
+
+// ❌ Bad constraints: too broad
+fn sort<T>(items: T[]) -> T[] {
+    // No constraints, may cause runtime errors
+}
+
+// ✅ Good constraints: combine necessary capabilities
+fn process<T extends Addable<T> + Comparable<T> + Cloneable<T>>(item: T) -> T {
+    // Clearly specify needed capabilities
+}
+```
+
+### Type Inference Optimization
+```hulo
+// ✅ Leverage type inference
+fn createBox<T>(value: T) -> Box<T> {
+    return Box($value)
+}
+
+let box = createBox(42) // Automatically inferred as Box<num>
+
+// ✅ Explicit type parameters (when inference is inaccurate)
+let box = createBox<num>(42) // Explicitly specify type
+```
+
+### Progressive Enhancement of Generic Constraints
+```hulo
+// Basic version
+fn process<T>(item: T) -> T {
+    return $item
+}
+
+// Enhanced version: add constraints
+fn process<T extends Cloneable<T>>(item: T) -> T {
+    return $item.clone()
+}
+
+// Further enhancement: more constraints
+fn process<T extends Cloneable<T> + Comparable<T>>(item: T) -> T {
+    let cloned = $item.clone()
+    return $cloned > $item ? $cloned : $item
+}
 ```
