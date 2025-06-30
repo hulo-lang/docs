@@ -12,6 +12,17 @@
 
 > Hulo-Docs 是 [Hulo 语言](https://github.com/hulo-lang/hulo) 的官方文档站点源码，基于 [VuePress](https://vuepress.vuejs.org/) 构建，提供 Hulo 语言的教程、标准库文档、使用指南等内容。
 
+## 📦 安装
+```sh
+git clone git@github.com:hulo-lang/docs.git
+cd docs
+```
+
+## 🚀 使用
+```sh
+pnpm i
+pnpm docs:dev
+```
 
 ## 🤝 参与贡献
 

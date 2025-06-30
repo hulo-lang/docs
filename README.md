@@ -11,6 +11,18 @@ English | [简体中文](README.zh-CN.md)
 
 > Hulo-Docs is the official documentation site for the [Hulo language](https://github.com/hulo-lang/hulo), built with [VuePress](https://vuepress.vuejs.org/). It provides tutorials, API references, and guides for Hulo users.
 
+## 📦 Install
+```sh
+git clone git@github.com:hulo-lang/docs.git
+cd docs
+```
+
+## 🚀 Usage
+```sh
+pnpm i
+pnpm docs:dev
+```
+
 ## 🤝 Contributing
 
 All contributions are welcome, including:
