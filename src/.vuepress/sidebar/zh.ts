@@ -8,7 +8,7 @@ export const zhSidebar = sidebar({
       prefix: "guide/",
       collapsible: false,
       link: "guide/",
-      children: ["install", "usage"],
+      children: ["install", "env", "usage"],
     },
     {
       text: "语法",

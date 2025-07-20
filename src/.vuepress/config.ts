@@ -3,7 +3,9 @@ import theme from "./theme.js";
 
 export default defineUserConfig({
   base: "/docs/",
-
+  head: [
+    ["link", { rel: "icon", href: "tab-icon.png" }],
+  ],
   locales: {
     "/": {
       lang: "en-US",

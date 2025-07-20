@@ -13,7 +13,7 @@ export default hopeTheme({
 
   logo: "/favicon.ico",
 
-  repo: "hulo-lang/docs",
+  repo: "hulo-lang/hulo",
 
   docsDir: "src",
 
@@ -25,7 +25,7 @@ export default hopeTheme({
       // sidebar
       sidebar: enSidebar,
 
-      footer: "❤️ Thank you for your attention.",
+      footer: "Made with ❤️ for hackers, ops, and anyone who loves clean automation.",
 
       displayFooter: true,
 
@@ -44,7 +44,7 @@ export default hopeTheme({
       // sidebar
       sidebar: zhSidebar,
 
-      footer: "❤️ 感谢您的关注。",
+      footer: "为热爱自动化的黑客、运维和开发者而生 ❤️",
 
       displayFooter: true,
 
@@ -133,13 +133,13 @@ export default hopeTheme({
   plugins: {
     // Note: This is for testing ONLY!
     // You MUST generate and use your own comment service in production.
-    comment: {
-      provider: "Giscus",
-      repo: "vuepress-theme-hope/giscus-discussions",
-      repoId: "R_kgDOG_Pt2A",
-      category: "Announcements",
-      categoryId: "DIC_kwDOG_Pt2M4COD69",
-    },
+    // comment: {
+    //   provider: "Giscus",
+    //   repo: "vuepress-theme-hope/giscus-discussions",
+    //   repoId: "R_kgDOG_Pt2A",
+    //   category: "Announcements",
+    //   categoryId: "DIC_kwDOG_Pt2M4COD69",
+    // },
 
     components: {
       components: ["Badge", "VPCard", "VPBanner", "SiteInfo"],

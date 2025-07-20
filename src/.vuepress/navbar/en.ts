@@ -2,6 +2,12 @@ import { navbar } from "vuepress-theme-hope";
 
 export const enNavbar = navbar([
   {
+    text: "Home",
+    icon: "house",
+    prefix: "/home/",
+    link: "/"
+  },
+  {
     text: "Get Started",
     icon: "signs-post",
     prefix: "/guide/",
@@ -12,6 +18,12 @@ export const enNavbar = navbar([
     icon: "code",
     prefix: "/grammar/",
     link: "/grammar/"
+  },
+  {
+    text: "Modules",
+    icon: "box",
+    prefix: "/modules/",
+    link: "/modules/"
   },
   {
     text: "Blueprints",
