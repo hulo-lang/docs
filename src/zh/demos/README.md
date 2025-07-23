@@ -1,5 +1,5 @@
 ---
-title: Demos
+title: 案例
 icon: fa-solid fa-splotch
 ---
 

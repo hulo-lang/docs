@@ -73,7 +73,7 @@ export const zhSidebar = sidebar({
     {
       text: "反馈",
       icon: "rss",
-      link: "https://ecosystem.vuejs.press/plugins/markdown/revealjs/demo.html",
+      link: "https://github.com/hulo-lang/hulo/issues",
     },
   ],
   "/zh/blueprints/": [
