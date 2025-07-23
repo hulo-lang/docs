@@ -33,8 +33,8 @@ export const enNavbar = navbar([
   },
   "/demos/",
   {
-    text: "Others",
-    icon: "circle-info",
+    text: "Help & Support",
+    icon: "circle-check",
     children: [
       {
         text: "PROJECT",

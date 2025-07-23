@@ -33,8 +33,8 @@ export const zhNavbar = navbar([
   },
   "/zh/demos/",
   {
-    text: "其他",
-    icon: "circle-info",
+    text: "帮助与支持",
+    icon: "circle-check",
     children: [
       {
         text: "项目",
@@ -42,27 +42,27 @@ export const zhNavbar = navbar([
           {
             text: "常见问题",
             icon: "circle-question",
-            link: "/others/faq"
+            link: "/zh/others/faq"
           },
           {
             text: "路线图",
             icon: "map",
-            link: "/others/roadmap",
+            link: "/zh/others/roadmap",
           },
           {
             text: "变更日志",
             icon: "clock",
-            link: "/others/changelog",
+            link: "/zh/others/changelog",
           },
           {
             text: "贡献指南",
             icon: "lightbulb",
-            link: "/others/contribution",
+            link: "/zh/others/contribution",
           },
           {
             text: "协议",
             icon: "paperclip",
-            link: "/others/license"
+            link: "/zh/others/license"
           }
         ]
       }
