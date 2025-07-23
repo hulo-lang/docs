@@ -20,10 +20,48 @@ export const zhNavbar = navbar([
     link: "/zh/grammar/"
   },
   {
-    text: "模块",
-    icon: "box",
-    prefix: "/zh/modules/",
-    link: "/zh/modules/"
+    text: "生态系统",
+    icon: "layer-group",
+    children: [
+      {
+        text: "库",
+        icon: "box",
+        children: [
+          {
+            text: "标准库",
+            link: "/libs/builtin"
+          },
+          {
+            text: "模块",
+            link: "/modules/builtin"
+          },
+        ]
+      },
+      {
+        text: "社区",
+        icon: "users",
+        children: [
+          {
+            text: "Discord 聊天室",
+            link: "https://discord.gg/EGyaCRjEmV"
+          },
+        ]
+      },
+      {
+        text: "插件",
+        icon: "plug",
+        children: [
+          {
+            text: "VSCode 扩展",
+            link: "https://marketplace.visualstudio.com/items?itemName=hulo-lang.hulo"
+          },
+          {
+            text: "JetBrains 插件",
+            link: "https://plugins.jetbrains.com/plugin"
+          },
+        ]
+      }
+    ]
   },
   {
     text: "蓝图",

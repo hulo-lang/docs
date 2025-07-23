@@ -20,10 +20,48 @@ export const enNavbar = navbar([
     link: "/grammar/"
   },
   {
-    text: "Modules",
-    icon: "box",
-    prefix: "/modules/",
-    link: "/modules/"
+    text: "Ecosystem",
+    icon: "layer-group",
+    children: [
+      {
+        text: "Library",
+        icon: "box",
+        children: [
+          {
+            text: "Standard Library",
+            link: "/libs/builtin"
+          },
+          {
+            text: "Modules",
+            link: "/modules/builtin"
+          },
+        ]
+      },
+      {
+        text: "Community",
+        icon: "users",
+        children: [
+          {
+            text: "Discord Chat",
+            link: "https://discord.gg/EGyaCRjEmV"
+          },
+        ]
+      },
+      {
+        text: "Plugins",
+        icon: "plug",
+        children: [
+          {
+            text: "VSCode Extension",
+            link: "https://marketplace.visualstudio.com/items?itemName=hulo-lang.hulo"
+          },
+          {
+            text: "JetBrains Plugin",
+            link: "https://plugins.jetbrains.com/plugin"
+          },
+        ]
+      }
+    ]
   },
   {
     text: "Blueprints",
