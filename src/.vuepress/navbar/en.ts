@@ -64,10 +64,10 @@ export const enNavbar = navbar([
     ]
   },
   {
-    text: "Blueprints",
-    icon: "lightbulb",
-    prefix: "/blueprints/",
-    link: "/blueprints/"
+    text: "Architecture",
+    icon: "sitemap",
+    prefix: "/architecture/",
+    link: "/architecture/"
   },
   "/demos/",
   {

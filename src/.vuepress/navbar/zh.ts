@@ -29,11 +29,11 @@ export const zhNavbar = navbar([
         children: [
           {
             text: "标准库",
-            link: "/libs/builtin"
+            link: "/zh/libs/builtin"
           },
           {
             text: "模块",
-            link: "/modules/builtin"
+            link: "/zh/modules/builtin"
           },
         ]
       },
@@ -64,10 +64,10 @@ export const zhNavbar = navbar([
     ]
   },
   {
-    text: "蓝图",
-    icon: "lightbulb",
-    prefix: "/zh/blueprints/",
-    link: "/zh/blueprints/"
+    text: "架构",
+    icon: "sitemap",
+    prefix: "/zh/architecture/",
+    link: "/zh/architecture/"
   },
   "/zh/demos/",
   {

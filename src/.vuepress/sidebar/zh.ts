@@ -76,13 +76,24 @@ export const zhSidebar = sidebar({
       link: "https://github.com/hulo-lang/hulo/issues",
     },
   ],
-  "/zh/blueprints/": [
+  "/zh/architecture/": [
     "architecture",
     "hcr",
     {
+      text: "分析器",
+      icon: "microscope",
+      prefix: "/zh/architecture/analyzer/",
+      link: "/zh/architecture/analyzer/",
+      children: [
+        "install",
+        "quickstart",
+        "grammar"
+      ]
+    },
+    {
       text: "Bash",
       icon: "fa-brands fa-linux",
-      prefix: "/zh/blueprints/bash/",
+      prefix: "/zh/architecture/bash/",
       collapsible: true,
       children: [
         "type",
@@ -95,28 +106,28 @@ export const zhSidebar = sidebar({
     {
       text: "Powershell",
       icon: "fa-brands fa-windows",
-      prefix: "/zh/blueprints/powershell/",
+      prefix: "/zh/architecture/powershell/",
       collapsible: true,
       children: []
     },
     {
       text: "Batch",
       icon: "fa-brands fa-windows",
-      prefix: "/zh/blueprints/batch/",
+      prefix: "/zh/architecture/batch/",
       collapsible: true,
       children: ["type"]
     },
     {
       text: "VBScript",
       icon: "fa-solid fa-v",
-      prefix: "/zh/blueprints/vbs/",
+      prefix: "/zh/architecture/vbs/",
       collapsible: true,
       children: ["branch"]
     },
     {
       text: "Amber",
       icon: "fa-solid fa-diamond",
-      prefix: "/zh/blueprints/amber/",
+      prefix: "/zh/architecture/amber/",
       collapsible: true,
       children: [
         "type",
