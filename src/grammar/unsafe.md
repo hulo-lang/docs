@@ -294,12 +294,12 @@ let timestamp = date_now()
 模板注释没有单行注释，默认就是支持多行注释。同正常的注释一样，不支持嵌套，必须紧贴分界符。注释过的代码片段，在编译后会消失。
 ```hulo
 unsafe {
-  {{/* 这是单行注释 */}}
+  {# 这是单行注释 #}
 
-  {{/*
+  {#
       这是一个
           多行注释
-  */}}
+  #}
 }
 ```
 
@@ -321,11 +321,11 @@ $ {
 Hulo 的条件判断有以下几种方法
 ```hulo
 ${
-  {{if pipeline}} T1 {{end}}
+  {% if pipeline %} T1 {% end %}
   
-  {{if pipeline}} T1 {{else}} T0 {{end}}
+  {% if pipeline %} T1 {% else %} T0 {% end %}
 
-  {{if pipeline}} T2 {{else if pipeline}} T1 {{else}} T0 {{end}}
+  {% if pipeline %} T2 {% else if pipeline %} T1 {% else %} T0 {% end %}
 }
 ```
 
@@ -333,7 +333,7 @@ ${
 
 ```hulo
 ${
-  {{loop pipeline}} T1 {{end}}
+  {% loop pipeline %} T1 {% end %}
 }
 ```
 
@@ -344,9 +344,9 @@ ${
 let count = 10
 
 ${
-  {{loop i in count}}
+  {% loop i in count %}
     echo {{$i}}
-  {{end}}
+  {% end %}
 }
 ```
 
@@ -364,10 +364,10 @@ let count = 10
 
 ${
   {{ val := 0 }}
-  {{loop i in count}}
+  {% loop i in count %}
     echo {{$i}}
     {{ val += i * 10 }}
-  {{end}}
+  {% end %}
 }
 ```
 
@@ -436,13 +436,13 @@ ${
 }
 ```
 
-### 子模板
+### 宏
 
 #### 声明
 ```hulo
-{{define X(a, b)}}
+{% macro X(a, b) %}
   echo {{$a}} {{$b}}
-{{end}}
+{% end %}
 ```
 
 #### 调用
